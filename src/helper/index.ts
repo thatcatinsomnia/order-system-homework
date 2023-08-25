@@ -1,4 +1,4 @@
-import { Shop } from '../hooks/useVenders';
+import { Vender } from '../hooks/useVenders';
 import { faker } from '@faker-js/faker';
 
 export async function delay(ms: number) {
@@ -9,7 +9,7 @@ function generateFullAddress() {
   return `${faker.location.county()} ${faker.location.streetAddress()}, ${faker.location.city()}, ${faker.location.country()}`;
 }
 
-function generateShop() {
+function generateVender() {
   const id = faker.database.mongodbObjectId();
   const name = faker.company.name();
   const location = generateFullAddress();
@@ -23,8 +23,8 @@ function generateShop() {
   };
 }
 
-export function generateShops(count: number = 100): Shop[] {
-  const fakeShops = faker.helpers.multiple(generateShop, { count: count });
+export function generateVenders(count: number = 100): Vender[] {
+  const fakeVenders = faker.helpers.multiple(generateVender, { count: count });
 
-  return fakeShops;
+  return fakeVenders;
 }

@@ -21,7 +21,7 @@ export default function VenderList() {
   const isEmptyData = !data || !data.length;
 
   return (
-    <div className={styles.shopList}>
+    <div className={styles.venderList}>
       {isEmptyData ? "No Shops Data" : (
         data.map(vender => <Vender key={vender.id} vender={vender} />)
       )}
