@@ -7,7 +7,7 @@ type Props = {
 
 export default function Vender({ vender }: Props) {
   return (
-    <div className={styles.vender}>
+    <div>
       <div className={styles.imgBox}>
         <img src={vender.image} alt={vender.name} />
       </div>

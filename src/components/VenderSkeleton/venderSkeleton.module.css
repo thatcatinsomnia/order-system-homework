@@ -1,0 +1,14 @@
+.imgSkeleton {
+  /* set the height equal to vender image */
+  height: 240px;
+  background: var(--bg-skeleton);
+  border-radius: 4px;
+}
+
+.nameSkeleton {
+  margin-top: 0.4em;
+  height: 1.6em;
+  width: 140px;
+  background: var(--bg-skeleton);
+  border-radius: 4px;
+}

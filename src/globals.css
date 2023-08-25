@@ -1,3 +1,21 @@
+:root {
+  --bg-skeleton: hsla(240, 9%, 37%, 0.365);
+}
+
 .page {
   padding: 24px;
+}
+
+.animate-skeleton {
+  animation: pluse-skeleton 2s cubic-bezier(0.1, 0.04, 0.6, 0.99) infinite;
+}
+
+@keyframes pluse-skeleton {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
 }
