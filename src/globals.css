@@ -1,9 +1,6 @@
 :root {
   --bg-skeleton: hsla(240, 9%, 37%, 0.365);
-}
-
-.page {
-  padding: 24px;
+  --radius: 4px;
 }
 
 .animate-skeleton {

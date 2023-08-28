@@ -1,9 +1,10 @@
-import ShopList from '../components/VenderList/VenderList';
+import Layout from '../components/Layout';
+import VenderList from '../components/VenderList/VenderList';
 
 export default function Home() {
   return (
-    <div className="page">
-      <ShopList />
-    </div>
+    <Layout>
+      <VenderList />
+    </Layout>
   );
 }

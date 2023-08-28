@@ -860,5 +860,66 @@
       "name": "后湯包 (台南東豐店)",
       "image": "https://images.deliveryhero.io/image/fd-tw/LH/vvjf-listing.jpg"
     }
+  ],
+  "vender-detail": [
+    {
+      "id": 1,
+      "cover": "https://picsum.photos/1200/300",
+      "description": "壬戌之秋，七月既望，蘇子與客泛舟遊於赤壁之下。清風徐來，水波不興，舉酒屬客，誦明月之詩，歌窈窕之章。少焉，月出於東山之上，徘徊於斗牛之間，白露橫江，水光接天；縱一葦之所如，凌萬頃之茫然。浩浩乎如馮虛御風，而不知其所止；飄飄乎如遺世獨立，羽化而登仙。",
+      "products": [
+        {
+          "id": 1,
+          "category": "熱門商品",
+          "items": [
+            {
+              "id": 1,
+              "name": "卡拉OK雞腿堡套餐",
+              "price": 399
+            },
+            {
+              "id": 2,
+              "name": "脆皮雞排套餐",
+              "price": 199
+            },
+            {
+              "id": 3,
+              "name": "上笑雞塊套餐",
+              "price": 187
+            },
+            {
+              "id": 4,
+              "name": "香草紙包雞套餐",
+              "price": 356
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "category": "最新上市",
+          "items": [
+            {
+              "id": 1,
+              "name": "卡拉OK雞腿堡套餐",
+              "price": 399
+            },
+            {
+              "id": 2,
+              "name": "脆皮雞排套餐",
+              "price": 199
+            },
+            {
+              "id": 3,
+              "name": "上笑雞塊套餐",
+              "price": 187
+            },
+            {
+              "id": 4,
+              "name": "香草紙包雞套餐",
+              "price": 356
+            }
+          ]
+        }
+      ]
+    }
   ]
 }

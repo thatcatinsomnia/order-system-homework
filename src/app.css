@@ -15,10 +15,15 @@ html {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  background: rgb(237, 237, 240);
 }
 
 input, button, textarea, select {
   font: inherit;
+}
+
+img, video, picture, canvas {
+  display: block;
 }
 
 #root {

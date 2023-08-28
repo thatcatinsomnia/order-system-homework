@@ -66,7 +66,8 @@ export default function useVenders() {
       }
 
       return undefined;
-    }
+    },
+    retry: false
   });
 
   return {

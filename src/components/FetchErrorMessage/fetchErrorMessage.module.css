@@ -1,0 +1,8 @@
+.message {
+  margin: 40px auto;
+  padding: 20px;
+  max-width: 300px;
+  color: rgb(223, 2, 2);
+  background: rgba(245, 37, 37, 0.502);
+  border-radius: var(--radius);
+}

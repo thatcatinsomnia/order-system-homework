@@ -1,4 +1,5 @@
 import type { Vender as VenderType } from '../../hooks/useVenders';
+import { Link } from 'react-router-dom';
 import styles from './vender.module.css';
 
 type Props = {
@@ -7,11 +8,15 @@ type Props = {
 
 export default function Vender({ vender }: Props) {
   return (
-    <div>
+    <Link 
+      className={styles.vender}
+      to={`/venders/${vender.id}/products`}
+      state={{ venderName: vender.name }}
+    >
       <div className={styles.imgBox}>
         <img src={vender.image} alt={vender.name} />
       </div>
       <p>{vender.name}</p>
-    </div>
+    </Link>
   );
 }

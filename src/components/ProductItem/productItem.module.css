@@ -1,0 +1,33 @@
+.productItem {
+  border-radius: var(--radius);
+  background: white;
+  display: flex;
+  overflow: hidden;
+  color: hsl(253, 10%, 17%);
+  box-shadow: 1px 1px 6px -2px rgb(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.content {
+  padding: 16px;
+}
+
+.name {
+  white-space: nowrap;
+}
+
+.button {
+  margin-left: auto;
+  margin-right: 12px;
+  background: none;
+  outline: none;
+  border: none;
+  color: hsl(254, 10%, 33%);
+  cursor: pointer;
+}
