@@ -1,6 +1,14 @@
 # 餐點系統
 點餐系統前端練習
 
+# How to run
+1. git clone https://github.com/thatcatinsomnia/order-system-homework.git
+2. cd order-system-homework
+3. pnpm i
+4. pnpm watch:json (模擬 server 回傳 api 資料)
+5. pnpm dev (前端 server)
+
+
 ## 需求 / 限制
 - 餐點欄位必須包含以下項目:
    - Name
@@ -18,7 +26,3 @@
 - [ ] 修改餐點
 - [ ] 移除餐點
    - [ ] alert 刪除提示
-
-## routes 設計
-- [ ] meals 餐點列表
-- [ ] meals/new 新增餐點

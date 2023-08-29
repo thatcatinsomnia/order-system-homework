@@ -874,22 +874,270 @@
             {
               "id": 1,
               "name": "卡拉OK雞腿堡套餐",
-              "price": 399
+              "price": 399,
+              "variants": [
+                {
+                  "id": 1,
+                  "name": "是否需要餐具?",
+                  "price": 10,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "name": "是否需要胡椒粉?",
+                  "price": 10,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                },
+                {
+                  "id": 3,
+                  "name": "是否需要番茄醬?",
+                  "price": 10,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                },
+                {
+                  "id": 4,
+                  "name": "是否需要餐巾紙?",
+                  "price": 10,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                }
+              ]
             },
             {
               "id": 2,
               "name": "脆皮雞排套餐",
-              "price": 199
+              "price": 199,
+              "variants": [
+                {
+                  "id": 1,
+                  "name": "是否需要餐具?",
+                  "price": 10,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "name": "是否需要胡椒粉?",
+                  "price": 10,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                },
+                {
+                  "id": 3,
+                  "name": "是否需要番茄醬?",
+                  "price": 10,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                },
+                {
+                  "id": 4,
+                  "name": "是否需要餐巾紙?",
+                  "price": 10,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                }
+              ]
             },
             {
               "id": 3,
               "name": "上笑雞塊套餐",
-              "price": 187
+              "price": 187,
+              "variants": [
+                {
+                  "id": 1,
+                  "name": "是否需要餐具?",
+                  "price": 10,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "name": "是否需要胡椒粉?",
+                  "price": 10,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                },
+                {
+                  "id": 3,
+                  "name": "是否需要番茄醬?",
+                  "price": 10,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                },
+                {
+                  "id": 4,
+                  "name": "是否需要餐巾紙?",
+                  "price": 10,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                }
+              ]
             },
             {
               "id": 4,
               "name": "香草紙包雞套餐",
-              "price": 356
+              "price": 356,
+              "variants": [
+                {
+                  "id": 1,
+                  "name": "是否需要餐具?",
+                  "price": 10,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "name": "是否需要胡椒粉?",
+                  "price": 10,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                },
+                {
+                  "id": 3,
+                  "name": "是否需要番茄醬?",
+                  "price": 10,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                },
+                {
+                  "id": 4,
+                  "name": "是否需要餐巾紙?",
+                  "price": 10,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -899,23 +1147,92 @@
           "items": [
             {
               "id": 1,
-              "name": "卡拉OK雞腿堡套餐",
-              "price": 399
+              "name": "紅茶拿鐵",
+              "price": 30,
+              "variants": [
+                {
+                  "id": 5,
+                  "name": "甜度",
+                  "options": [
+                    {
+                      "name": "全糖",
+                      "value": 10
+                    },
+                    {
+                      "name": "少糖",
+                      "value": 8
+                    },
+                    {
+                      "name": "半糖",
+                      "value": 5
+                    },
+                    {
+                      "name": "微糖",
+                      "value": 3
+                    },
+                    {
+                      "name": "無糖",
+                      "value": 0
+                    }
+                  ]
+                },
+                {
+                  "id": 6,
+                  "name": "冰量",
+                  "options": [
+                    {
+                      "name": "正常",
+                      "value": 10
+                    },
+                    {
+                      "name": "多冰",
+                      "value": 7
+                    },
+                    {
+                      "name": "半冰",
+                      "value": 5
+                    },
+                    {
+                      "name": "少冰",
+                      "value": 3
+                    },
+                    {
+                      "name": "去冰",
+                      "value": 1
+                    }
+                  ]
+                },
+                {
+                  "id": 7,
+                  "name": "提袋",
+                  "price": 2,
+                  "options": [
+                    {
+                      "name": "是",
+                      "value": "y"
+                    },
+                    {
+                      "name": "否",
+                      "value": "n"
+                    }
+                  ]
+                }
+              ]
             },
             {
               "id": 2,
-              "name": "脆皮雞排套餐",
-              "price": 199
+              "name": "綠茶拿鐵",
+              "price": 30
             },
             {
               "id": 3,
-              "name": "上笑雞塊套餐",
-              "price": 187
+              "name": "黃金烏龍拿鐵",
+              "price": 30
             },
             {
               "id": 4,
-              "name": "香草紙包雞套餐",
-              "price": 356
+              "name": "可可芭蕾拿鐵",
+              "price": 50
             }
           ]
         }

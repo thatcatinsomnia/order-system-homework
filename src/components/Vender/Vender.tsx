@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './vender.module.css';
 
 type Props = {
-  vender: VenderType
+  vender: VenderType;
 }
 
 export default function Vender({ vender }: Props) {
