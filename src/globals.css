@@ -1,6 +1,13 @@
 :root {
   --bg-skeleton: hsla(240, 9%, 37%, 0.365);
   --radius: 4px;
+
+  --border-light: 1px solid hsl(220, 11%, 66%);
+
+  --color-primary: hsl(352, 77%, 60%);
+  --color-primary-2: hsl(352, 62%, 50%);
+
+  --color-hover-hint: hsl(228, 35%, 92%);
 }
 
 .animate-skeleton {

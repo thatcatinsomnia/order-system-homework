@@ -18,7 +18,33 @@ export type Item = {
   id: number;
   name: string;
   price: number;
+  variants: Variant[];
 };
+
+export type VariantRadio = {
+  type: 'radio';
+  id: number;
+  name: string;
+  price: number;
+  options: Option[];
+  selected?: string;
+};
+
+export type VariantCheckbox = {
+  type: 'checkbox';
+  id: number;
+  name: string;
+  price: number;
+  checked?: boolean;
+};
+
+export type Variant = VariantRadio | VariantCheckbox;
+
+export type Option = {
+  name: string;
+  value: string | number;
+};
+
 
 const url = 'http://localhost:3000/vender-detail';
 
@@ -29,7 +55,7 @@ async function fetchVenderProducts(id: number) {
     throw new Error('can\'t fetch venders data from json server. 😰');
   }
 
-  // use id to get the data in array
+  //TODO: use id to get the data in array
   const data = res.data[0];
 
   return data as VenderDetail;
