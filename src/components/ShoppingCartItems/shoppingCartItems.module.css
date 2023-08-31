@@ -1,0 +1,15 @@
+.container {
+  margin: 0 auto;
+  padding: var(--gap-edge);
+  max-width: 760px;
+}
+
+.title {
+  margin-bottom: 12px;
+  font-size: 24px;
+}
+
+.cartList {
+  padding-left: 0px;
+  list-style: none;
+}

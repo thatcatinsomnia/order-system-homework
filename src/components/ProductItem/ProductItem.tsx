@@ -1,5 +1,6 @@
 import type { Item } from '../../hooks/useVenderProducts';
 import { useState, useRef, useMemo } from 'react';
+import randomId from '../../../helper/randomId';
 import useSelectedItemStore, { increaseQuantity, decreaseQuantity, setSelectedItem, resetSelectedItem } from '../../stores/useSelectedItemStore';
 import { addToShoppingCart } from '../../stores/useShoppingCartStore';
 import { FiPlus, FiMinus } from 'react-icons/fi';
@@ -10,11 +11,10 @@ import styles from './productItem.module.css';
 
 type Props = {
   item: Item;
+  venderName: string;
 };
 
-export default function ProductItem({ item }: Props) {
-  const randomImageSeed = Math.random().toString().substring(2, 5);
-
+export default function ProductItem({ item, venderName }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const customerRef = useRef<HTMLInputElement>(null);
   const noteRef = useRef<HTMLTextAreaElement>(null);
@@ -47,8 +47,10 @@ export default function ProductItem({ item }: Props) {
       alert('please typing customer field.')
       return;
     }
-
+    
     addToShoppingCart({
+      id: randomId(),
+      venderName: venderName,
       customer: customerRef.current.value,
       note: noteRef.current?.value || '',
       item: selectedItem as Item,
@@ -63,7 +65,7 @@ export default function ProductItem({ item }: Props) {
       <li className={styles.item} onClick={handleSelecteItem}>
         <img 
           className={styles.itemImg}
-          src={`https://loremflickr.com/100/100/drinks,meals?random=${randomImageSeed}`} 
+          src={`https://loremflickr.com/100/100/drinks,meals`} 
         />
 
         <div className={styles.itemContent}>
@@ -81,7 +83,7 @@ export default function ProductItem({ item }: Props) {
           <div className={styles.modalWrapper}>
             <div className={styles.modalImgBox}>
               <div className={styles.modalBackdrop} />
-              <img className={styles.modalImg} src="https://picsum.photos/800/600" alt={item.name} />
+              <img className={styles.modalImg} src="https://loremflickr.com/800/600/drinks,meals" alt={item.name} />
             </div>
 
             <div className={styles.modalHeader}>

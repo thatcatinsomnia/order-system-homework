@@ -37,7 +37,7 @@ export default function VenderProducts() {
               <p className={styles.category}>{product.category} 🎉</p>
 
               <ul className={styles.productItems}>
-                {product.items.map(item => <ProductItem key={item.id} item={item} />)}
+                {product.items.map(item => <ProductItem key={item.id} item={item} venderName={venderName} />)}
               </ul>
             </div>
           ))}
