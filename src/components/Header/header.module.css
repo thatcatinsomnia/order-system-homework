@@ -1,0 +1,54 @@
+.header {
+  padding: 0px 24px;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  box-shadow: 0px 2px 6px -2px hsl(0, 0%, 0%, 0.2);
+}
+
+.logoLink {
+  width: 136px;
+  height: 48px;
+}
+
+.logoLink svg {
+  width: 100%;
+  height: 100%;
+}
+
+.shoppingCartButton {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+  border: none;
+  background: none;
+  color: hsl(245, 12%, 37%);
+  cursor: pointer;
+  transition: background-color 200ms ease;
+  position: relative;
+}
+
+.shoppingCartButton:hover {
+  background: hsla(352, 90%, 51%, 0.082);
+}
+
+.count {
+  --size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: -6px;
+  top: -4px;
+  width: var(--size);
+  height: var(--size);
+  background: hsl(352, 78%, 64%);
+  border-radius: 9999px;
+  font-size: 10px;
+  color: white;
+}

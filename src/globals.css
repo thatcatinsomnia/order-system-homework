@@ -4,10 +4,12 @@
 
   --border-light: 1px solid hsl(220, 11%, 66%);
 
+  --gap-edge: 14px;
+
   --color-primary: hsl(352, 77%, 60%);
   --color-primary-2: hsl(352, 62%, 50%);
 
-  --color-hover-hint: hsl(228, 35%, 92%);
+  --color-hover-hint: hsla(352, 90%, 51%, 0.082);
 }
 
 .animate-skeleton {

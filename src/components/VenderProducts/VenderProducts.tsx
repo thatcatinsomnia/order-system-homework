@@ -23,11 +23,9 @@ export default function VenderProducts() {
 
   return (
     <div>
-      <img
-        className={styles.cover}
-        src={data?.cover}
-        alt={venderName}
-      />
+      <div className={styles.cover}>
+        <img src={data?.cover} alt={venderName} />
+      </div>
 
       <div className={styles.content}>
         <p className={styles.title}>{venderName}</p>

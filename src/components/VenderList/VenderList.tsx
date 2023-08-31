@@ -29,7 +29,7 @@ export default function VenderList() {
   const isEmptyData = (!data || !data?.pages.length) && !isLoading;
 
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.venderList}>
         {isEmptyData ? "No Venders Data" : (
           data?.pages.map(group => (
@@ -43,6 +43,6 @@ export default function VenderList() {
       <div ref={ref}>
         {inView && <LoadingSpinner />}
       </div>
-    </>
+    </div>
   );
 }

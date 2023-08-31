@@ -13,6 +13,8 @@ type Props = {
 };
 
 export default function ProductItem({ item }: Props) {
+  const randomImageSeed = Math.random().toString().substring(2, 5);
+
   const [isOpen, setIsOpen] = useState(false);
   const customerRef = useRef<HTMLInputElement>(null);
   const noteRef = useRef<HTMLTextAreaElement>(null);
@@ -61,7 +63,7 @@ export default function ProductItem({ item }: Props) {
       <li className={styles.item} onClick={handleSelecteItem}>
         <img 
           className={styles.itemImg}
-          src="https://picsum.photos/100/100" 
+          src={`https://loremflickr.com/100/100/drinks,meals?random=${randomImageSeed}`} 
         />
 
         <div className={styles.itemContent}>

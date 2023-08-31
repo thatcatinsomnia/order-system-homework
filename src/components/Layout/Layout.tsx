@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Header from '../Header';
 import styles from './layout.module.css';
 
 type Props = {
@@ -7,6 +8,9 @@ type Props = {
 
 export default function Layout({ children }: Props) {
   return (
-    <div className={styles.layout}>{children}</div>
+    <div className={styles.layout}>
+      <Header />
+      {children}
+    </div>
   );
 }

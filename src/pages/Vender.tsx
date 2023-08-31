@@ -1,5 +1,10 @@
+import Layout from '../components/Layout';
 import VenderProducts from '../components/VenderProducts';
 
 export default function Vender() {
-  return <VenderProducts />;
+  return (
+    <Layout>
+      <VenderProducts />
+    </Layout>
+  );
 }

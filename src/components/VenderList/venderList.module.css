@@ -1,5 +1,15 @@
+.container {
+  padding: var(--gap-edge);
+}
+
+@media screen and (min-width: 660px) {
+  .container {
+    --gap-edge: 24px;
+  }
+}
+
 .venderList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px 12px;
+  gap: 18px;
 }

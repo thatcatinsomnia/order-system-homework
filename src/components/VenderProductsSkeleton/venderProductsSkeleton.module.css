@@ -9,6 +9,18 @@
   background: var(--bg-skeleton);
 }
 
+@media screen and (min-width: 768px) {
+  .img {
+    height: 360px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .img {
+    height: 440px;
+  }
+}
+
 .content {
   margin: 0 auto;
   padding: 24px;

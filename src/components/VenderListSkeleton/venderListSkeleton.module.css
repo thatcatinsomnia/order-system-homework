@@ -1,6 +1,13 @@
 .venderListSkeleton {
   /* style is equal to vender list */
+  padding: var(--gap-edge);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px 12px;
+}
+
+@media screen and (min-width: 660px) {
+  .venderListSkeleton {
+    --gap-edge: 24px;
+  }
 }
