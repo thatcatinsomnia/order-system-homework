@@ -35,7 +35,7 @@ export type VariantCheckbox = {
   id: number;
   name: string;
   price: number;
-  checked?: boolean;
+  isChecked?: boolean;
 };
 
 export type Variant = VariantRadio | VariantCheckbox;

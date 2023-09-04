@@ -31,7 +31,7 @@ function calculateFinalPrice(cart: OrderItem[]) {
 export default function ShoppingCartItems() {
   const shoppingCart = useShoppingCartStore(state => state.cart);
   const editItem = useShoppingCartStore(state => state.editItem);
-  const venderName = shoppingCart[0]?.venderName;  
+  const venderName = shoppingCart[0]?.vender;  
 
   const itemCount = calculateItemCount(shoppingCart);
   const finalPrice = calculateFinalPrice(shoppingCart);
@@ -60,13 +60,15 @@ export default function ShoppingCartItems() {
             <p>總計: ${finalPrice}</p>
             (<small>外送費 ${FEE}</small>)
           </div>
-          <button>前往結帳 ({itemCount} 件商品)</button>
+          <button>前往結帳 (<span className={styles.count}>{itemCount}</span> 件商品)</button>
         </div>
       </div>
 
-      <Modal isOpen={!!editItem} onClose={clearEditItem}>
-        <ProductItem item={editItem?.item as Item} venderName={editItem?.venderName as string} />
-      </Modal>
+      {!!editItem && (
+        <Modal isOpen={!!editItem} onClose={clearEditItem}>
+          {JSON.stringify(editItem,null, 2)}
+        </Modal>
+      )}
     </>
   );
 }

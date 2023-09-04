@@ -1,19 +1,19 @@
-import type { SelectedItem } from '../../stores/useSelectedItemStore';
+import type { PickedItem } from '../../stores/usePickedItem';
+import{ decrease, increase } from '../../stores/usePickedItem';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import calculateItemPrice from '../../../helper/calculateItemPrice';
-import { increaseQuantity, decreaseQuantity } from '../../stores/useSelectedItemStore';
 import ProductVariants from '../ProductVariants';
 import RequiredTag from '../RequiredTag';
 import styles from './itemDetail.module.css';
 
 type Props = {
-  item: SelectedItem;
+  item: PickedItem;
   onAddToShoppingCart?: () => void;
-  onUpdateCustomer: (customer: string) => void;
-  onUpdateNote: (note: string) => void;
+  onUpdateCustomer?: (customer: string) => void;
+  onUpdateNote?: (note: string) => void;
 };
 
-export default function ItemDetail({ item, onAddToShoppingCart, onUpdateCustomer, onUpdateNote }: Props) {
+export default function ItemDetail({ item, onAddToShoppingCart, onUpdateNote, onUpdateCustomer }: Props) {
   const totalPrice = calculateItemPrice(item);
 
   return (
@@ -48,11 +48,11 @@ export default function ItemDetail({ item, onAddToShoppingCart, onUpdateCustomer
       
       <div className={styles.modalCTA}>
         <div className={styles.modalQuantityBox}>
-          <button className={styles.modalQuantityButton} onClick={decreaseQuantity}>
+          <button className={styles.modalQuantityButton} onClick={decrease}>
             <FiMinus />
           </button>
           <span className={styles.modalQuantity}>{item.quantity}</span>
-          <button className={styles.modalQuantityButton} onClick={increaseQuantity}>
+          <button className={styles.modalQuantityButton} onClick={increase}>
             <FiPlus />
           </button>
         </div>

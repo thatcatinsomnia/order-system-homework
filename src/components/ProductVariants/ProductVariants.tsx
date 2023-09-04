@@ -1,7 +1,6 @@
-import type { Item, Variant, VariantRadio, VariantCheckbox, Option } from '../../hooks/useVenderProducts';
-import { RadioGroup, Switch } from '@headlessui/react';
-import { FiCheck } from 'react-icons/fi';
-import useSelectedItemStore, { setSelectedItem } from '../../stores/useSelectedItemStore';
+import type { Variant } from '../../hooks/useVenderProducts';
+import RadioVariant from '../RadioVariant';
+import CheckboxVariant from '../CheckboxVariant';
 import styles from './productVariants.module.css';
 
 type Props = {
@@ -10,139 +9,16 @@ type Props = {
 
 export default function ProductVariants({ variant }: Props) {
   if (variant.type === 'radio') {
-    return <RadioVariant variant={variant} />
+    return (
+      <div className={styles.wrapper}>
+        <RadioVariant variant={variant} />
+      </div>
+    )
   }
   
   return (
     <div className={styles.wrapper}>
       <CheckboxVariant variant={variant} />
     </div>
-  );
-}
-
-type RadioVariantProps = {
-  variant: VariantRadio;
-};
-
-function RadioVariant({ variant }: RadioVariantProps) {
-  const item = useSelectedItemStore(state => state.item);
-  
-  const handleRadioChange = (value: string) => {
-    if (!item) {
-      return;
-    }
-
-    const updatedVariants = item.variants.map(v => {
-      if (v.type === 'checkbox') {
-        return {...v};
-      }
-      
-      if (v.id === variant.id) {
-        v.selected = value;
-      }
-
-      return {...v};
-    });
-
-    const updatedItem: Item = {
-      ...item,
-      variants: updatedVariants
-    };
-
-    setSelectedItem(updatedItem);
-  };
-
-  return (
-    <div className={styles.wrapper}>
-      <p className={styles.variantName}>
-        {variant.name}
-        <span className={styles.variantPrice}>{variant.price === -1 ? 'FREE' : `$${variant.price}`}</span>
-      </p>
-      <RadioGroup name={variant.name} onChange={handleRadioChange}>
-        {variant.options.map(option => <Option key={option.value} option={option} />)}
-      </RadioGroup>
-    </div>
-  );
-}
-
-type OptionProps = {
-  option: Option;
-};
-
-function Option({ option }: OptionProps) {
-  return (
-    <RadioGroup.Option value={option.name}>
-      {({ checked }) => (
-        <div className={styles.option}>
-          <RadioIcon checked={checked} />
-          <RadioGroup.Label>{option.name}</RadioGroup.Label>
-        </div>
-      )}
-    </RadioGroup.Option>
-  );
-}
-
-type CheckboxVariantProps = {
-  variant: VariantCheckbox;
-};
-
-function CheckboxVariant({ variant }: CheckboxVariantProps) {
-  const item = useSelectedItemStore(state => state.item);
-
-  const foundVariant = item?.variants.find(v => (v.id === variant.id)) as VariantCheckbox;
-  const { checked } = foundVariant;
-
-  const handleCheckboxChange = (checked: boolean) => {
-    if (!item) {
-      return;
-    }
-
-    const updatedVariants = item.variants.map(v => {
-      if (v.type !== 'checkbox') {
-        return {...v};
-      }
-
-      // set default value if the checkbox is not update yet.
-      v.checked = v.checked || false;
-      
-      if (v.id === variant.id) {
-        v.checked = checked;
-      }
-
-      return {...v};
-    });
-
-    const updatedItem: Item = {
-      ...item,
-      variants: updatedVariants
-    }
-
-    setSelectedItem(updatedItem);
-  }
-
-  return (
-    <Switch.Group>
-      <Switch.Label className={styles.checkboxLabel}>
-        <Switch 
-          className={`${styles.checkboxRectangle} ${checked ? styles.checked : ''}`}
-          checked={checked || false}
-          onChange={handleCheckboxChange}
-        >
-          {checked && <FiCheck />}
-        </Switch>
-        {variant.name}
-        <span className={styles.variantPrice}>{variant.price === -1 ? 'FREE' : `$${variant.price}`}</span>
-      </Switch.Label>
-    </Switch.Group>
-  );
-}
-
-type RadioIconProps = {
-  checked: boolean;
-};
-
-function RadioIcon({ checked }: RadioIconProps) {
-  return (
-    <div className={`${styles.radio} ${checked ? styles.checked : ''}`}></div>
   );
 }

@@ -9,7 +9,7 @@ type State = {
 
 export type OrderItem = {
   id: string;
-  venderName: string;
+  vender: string;
   customer: string;
   note: string;
   item: Item;

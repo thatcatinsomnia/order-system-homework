@@ -1,0 +1,46 @@
+.variantPrice {
+  margin-left: auto;
+  font-size: 14px;
+}
+
+.checkboxLabel {
+  margin-left: -18px;
+  margin-right: -18px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.checkboxLabel:hover {
+  background: var(--color-hover-hint);
+}
+
+.checkboxWrapper > * {
+  cursor: pointer;
+}
+
+.checkboxRectangle {
+  --size: 20px;
+
+  /* i have no idea why padding is set, maybe headless-ui set it */
+  padding: 0;
+  width: var(--size);
+  height: var(--size);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius);
+  background: none;
+  display: grid;
+  place-items: center;
+}
+
+.checkboxRectangle.checked {
+  background: var(--color-primary);
+  color: white;
+}
+
+
+.checkboxBox > svg {
+  position: absolute;
+}

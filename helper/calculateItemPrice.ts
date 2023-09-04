@@ -1,7 +1,7 @@
+import type { PickedItem } from '../src/stores/usePickedItem';
 import type { OrderItem } from '../src/stores/useShoppingCartStore';
-import type { SelectedItem } from '../src/stores/useSelectedItemStore';
 
-export default function calculateItemPrice(item: OrderItem | SelectedItem) {
+export default function calculateItemPrice(item: PickedItem | OrderItem) {
   if (!item.item) {
     return 0;
   }
@@ -13,7 +13,7 @@ export default function calculateItemPrice(item: OrderItem | SelectedItem) {
       total += variant.price;
     }
 
-    if (variant.type === 'checkbox' && variant.checked) {
+    if (variant.type === 'checkbox' && variant.isChecked) {
       total += variant.price
     }
 
