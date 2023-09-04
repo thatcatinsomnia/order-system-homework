@@ -4,6 +4,7 @@ import { create } from 'zustand';
 
 type State = {
   cart: OrderItem[] | [];
+  editItem: OrderItem | null;
 };
 
 export type OrderItem = {
@@ -20,7 +21,8 @@ const MINIMUM_QUANTITY = 1;
 const useShoppingCartStore = create<State>()(
   persist(
     (set, get) => ({
-      cart: []
+      cart: [],
+      editItem: null
     }),
     {
       name: 'order-system'
@@ -64,9 +66,14 @@ export const increase = (id: OrderItem['id']) => useShoppingCartStore.setState(s
   return { cart: updatedCart }
 });
 
-// export const increase = (index: number) => useShoppingCartStore.setState(state => {
-//   const updatedItems = state.items.map(item => item.)
+export const setEditItem = (item: OrderItem) => useShoppingCartStore.setState(state => ({
+  editItem: item
+}));
 
-// })
+export const clearEditItem = () => useShoppingCartStore.setState(() => {
+  return {
+    editItem: null
+  }
+});
 
 export default useShoppingCartStore;

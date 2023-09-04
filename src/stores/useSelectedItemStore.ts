@@ -1,31 +1,56 @@
 import type { Item } from '../hooks/useVenderProducts';
 import { create } from 'zustand';
 
-type State = {
-  quantity: number;
+export type SelectedItem = {
+  id: string;
+  vender: string;
+  customer: string;
+  note: string;
   item: Item | null;
+  quantity: number;
+};
+
+type State = SelectedItem;
+
+const initialState = {
+  id: '',
+  vender: '',
+  customer: '',
+  note: '',
+  item: null,
+  quantity: 1
 };
 
 const MINIMUM_QUANTITY = 1;
 
-const useSelectedItemStore = create<State>()(() => ({
-  quantity: MINIMUM_QUANTITY,
-  item: null
-}));
+const useSelectedItemStore = create<State>()(() => ({ ...initialState }));
 
 export const increaseQuantity = () => useSelectedItemStore.setState(state => ({
   quantity: state.quantity + 1
 }));
 
-export const decreaseQuantity = () => useSelectedItemStore.setState(state => ({
-  quantity: state.quantity > MINIMUM_QUANTITY ? state.quantity - 1 : MINIMUM_QUANTITY
-}));
+export const decreaseQuantity = () => useSelectedItemStore.setState(state => {
+  let updateQuantity = MINIMUM_QUANTITY;
 
-export const setSelectedItem = (item: Item | null) => useSelectedItemStore.setState({ item });
+  if (state.quantity > MINIMUM_QUANTITY) {
+    updateQuantity = state.quantity - 1;
+  }
+
+  return {
+    quantity: updateQuantity
+  };
+});
+
+export const setSelectedItem = (selectedItem: Omit<SelectedItem, 'customer' | 'note' | 'quantity'>) => useSelectedItemStore.setState({
+  ...selectedItem
+});
 
 export const resetSelectedItem = () => useSelectedItemStore.setState(state => ({
-  item: null,
-  quantity: 1
+  ...initialState,
+  item: null
 }));
+
+export const updateNote = (note: string) => useSelectedItemStore.setState(() => ({ note }));
+export const updateCustomer = (customer: string) => useSelectedItemStore.setState(() => ({ customer }));
 
 export default useSelectedItemStore;

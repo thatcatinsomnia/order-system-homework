@@ -1,4 +1,4 @@
-import type { Variant, VariantRadio, VariantCheckbox, Option } from '../../hooks/useVenderProducts';
+import type { Item, Variant, VariantRadio, VariantCheckbox, Option } from '../../hooks/useVenderProducts';
 import { RadioGroup, Switch } from '@headlessui/react';
 import { FiCheck } from 'react-icons/fi';
 import useSelectedItemStore, { setSelectedItem } from '../../stores/useSelectedItemStore';
@@ -25,25 +25,31 @@ type RadioVariantProps = {
 };
 
 function RadioVariant({ variant }: RadioVariantProps) {
-  const selectedItem = useSelectedItemStore(state => state.item);
+  const item = useSelectedItemStore(state => state.item);
   
   const handleRadioChange = (value: string) => {
-    if (!selectedItem) {
+    if (!item) {
       return;
     }
 
-    const updatedVariants = selectedItem.variants.map(v => {
-      if (v.type === 'radio' && v.id === variant.id) {
+    const updatedVariants = item.variants.map(v => {
+      if (v.type === 'checkbox') {
+        return {...v};
+      }
+      
+      if (v.id === variant.id) {
         v.selected = value;
       }
 
-      return v;
+      return {...v};
     });
 
-    setSelectedItem({
-      ...selectedItem,
+    const updatedItem: Item = {
+      ...item,
       variants: updatedVariants
-    });
+    };
+
+    setSelectedItem(updatedItem);
   };
 
   return (
@@ -81,28 +87,37 @@ type CheckboxVariantProps = {
 };
 
 function CheckboxVariant({ variant }: CheckboxVariantProps) {
-  const selectedItem = useSelectedItemStore(state => state.item);
+  const item = useSelectedItemStore(state => state.item);
 
-  const foundVariant = selectedItem?.variants.find(v => (v.id === variant.id)) as VariantCheckbox;
+  const foundVariant = item?.variants.find(v => (v.id === variant.id)) as VariantCheckbox;
   const { checked } = foundVariant;
 
   const handleCheckboxChange = (checked: boolean) => {
-    if (!selectedItem) {
+    if (!item) {
       return;
     }
 
-    const updatedVariants = selectedItem.variants.map(v => {
-      if (v.type === variant.type && v.id === variant.id) {
+    const updatedVariants = item.variants.map(v => {
+      if (v.type !== 'checkbox') {
+        return {...v};
+      }
+
+      // set default value if the checkbox is not update yet.
+      v.checked = v.checked || false;
+      
+      if (v.id === variant.id) {
         v.checked = checked;
       }
 
-      return v;
+      return {...v};
     });
 
-    setSelectedItem({
-      ...selectedItem,
+    const updatedItem: Item = {
+      ...item,
       variants: updatedVariants
-    });
+    }
+
+    setSelectedItem(updatedItem);
   }
 
   return (
