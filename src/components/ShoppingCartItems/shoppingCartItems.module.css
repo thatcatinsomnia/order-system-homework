@@ -1,6 +1,10 @@
 .container {
+  --footer-height: 68px;
+
   margin: 0 auto;
-  padding: var(--gap-edge);
+
+  /* add bottom gap to make shoppingCartItem visible */
+  padding: var(--gap-edge) var(--gap-edge) calc(var(--footer-height) + 20px);
   max-width: 760px;
 }
 
@@ -12,4 +16,74 @@
 .cartList {
   padding-left: 0px;
   list-style: none;
+}
+
+.empty {
+  margin: var(--gap-edge);
+  padding: 8px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgb(247, 231, 237);
+  border-radius: var(--radius);
+}
+
+.empty > p {
+  margin-bottom: 16px;
+  font-size: 18px;
+  color: hsl(230, 19%, 37%);
+}
+
+.empty > button {
+  padding: .65em 1.25em;
+  background: var(--color-primary);
+  border: none;
+  color: white;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.empty > button:hover {
+  background: var(--color-primary-2);
+}
+
+.cta {
+  margin-top: auto;
+  padding: var(--gap-edge);
+  width: 100%;
+  height: var(--footer-height); /* inherit from .container */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: white;
+  box-shadow: 0px -2px 6px -2px hsl(245, 14%, 18%, 0.1);
+}
+
+.price {
+  font-size: 16px;
+}
+
+.cta > button {
+  padding: .75em 1.25em;
+  background: var(--color-primary);
+  border: none;
+  color: white;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: backgorund-color 200ms ease;
+}
+
+.cta > button:hover {
+  background: var(--color-primary-2);
+}
+
+.count {
+  display: inline-block;
+  min-width: 1em;
 }

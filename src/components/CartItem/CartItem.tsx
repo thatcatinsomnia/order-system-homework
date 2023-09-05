@@ -1,6 +1,7 @@
 import type { OrderItem } from '../../stores/useShoppingCartStore';
 import { FiMinus, FiPlus, FiEdit as FiEdit } from 'react-icons/fi';
-import { decrease, increase } from '../../stores/useShoppingCartStore';
+import calculateItemPrice from '../../../helper/calculateItemPrice';
+import { decrease, increase, setEditItem } from '../../stores/useShoppingCartStore';
 import CartItemVariants from '../CartItemVariants/CartItemVariants';
 import styles from './cartItem.module.css';
 
@@ -8,26 +9,8 @@ type Props = {
   item: OrderItem;
 };
 
-function calculateTotalPrice(item: OrderItem) {
-  const itemPrice = item.item.price;
-
-  const variantsTotalPrice = item.item.variants.reduce((total, variant) => {
-    if (variant.type === 'radio') {
-      total += variant.price;
-    }
-
-    if (variant.type === 'checkbox' && variant.checked) {
-      total += variant.price
-    }
-
-    return total;
-  }, 0);
-
-  return (itemPrice + variantsTotalPrice) * item.quantity
-}
-
 export default function CartItem({ item }: Props) {
-  const totalPrice = calculateTotalPrice(item);
+  const totalPrice = calculateItemPrice(item);
 
   return (
     <div className={styles.cartItem}>
@@ -58,7 +41,10 @@ export default function CartItem({ item }: Props) {
         <CartItemVariants variants={item.item.variants} />
 
         <div className={styles.cartItemFooter}>
-          <button className={styles.cartItemEditButton}>
+          <button 
+            className={styles.cartItemEditButton}
+            onClick={() => setEditItem(item)}
+          >
             <span>編輯</span>
             <FiEdit />
           </button>

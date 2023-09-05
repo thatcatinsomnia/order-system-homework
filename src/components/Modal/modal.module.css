@@ -3,7 +3,7 @@
   inset: 0;
 
   /* make dialog always on top */
-  z-index: 100;  
+  z-index: 100;
 }
 
 .overlay {
@@ -58,10 +58,10 @@
   background: white;
   border-radius: var(--radius);
   cursor: pointer;
-  color: rgb(25, 33, 53);
+  color: black;
 }
 
 .close:hover {
-  background: rgb(204, 204, 211);
+  background: rgb(237, 203, 223);
   transition: background-color 0.2s ease;
 }

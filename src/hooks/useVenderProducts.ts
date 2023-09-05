@@ -35,7 +35,7 @@ export type VariantCheckbox = {
   id: number;
   name: string;
   price: number;
-  checked?: boolean;
+  isChecked?: boolean;
 };
 
 export type Variant = VariantRadio | VariantCheckbox;
@@ -48,14 +48,13 @@ export type Option = {
 
 const url = 'http://localhost:3000/vender-detail';
 
-async function fetchVenderProducts(id: number) {
+async function fetchVenderProducts() {
   const res = await axios.get(url);
   
   if (res.status !== 200) {
     throw new Error('can\'t fetch venders data from json server. 😰');
   }
 
-  //TODO: use id to get the data in array
   const data = res.data[0];
 
   return data as VenderDetail;
