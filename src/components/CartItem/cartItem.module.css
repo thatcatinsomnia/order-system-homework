@@ -102,7 +102,8 @@
   height: var(--size);
   display: grid;
   place-items: center;
-  background: hsl(352deg 62.46% 64.73% / 8.2%);
+  background: var(--color-quantity-btn);
+  transition: background-color 200ms ease;
   border: none;
   cursor: pointer;
   color: var(--color-primary);

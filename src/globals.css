@@ -12,6 +12,7 @@
   --color-primary-2: hsl(352, 62%, 50%);
 
   --color-hover-hint: hsla(352, 90%, 51%, 0.082);
+  --color-quantity-btn: hsl(352deg 62.46% 64.73% / 5.8%);
 }
 
 .animate-skeleton {
