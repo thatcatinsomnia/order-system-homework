@@ -88,6 +88,8 @@
   font-size: 24px;
   border-radius: var(--radius);
   color: var(--color-primary);
+  background: var(--color-quantity-btn);
+  transition: background-color 200ms ease;
 }
 
 .modalQuantityButton:hover {
