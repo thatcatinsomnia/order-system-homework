@@ -1,4 +1,4 @@
-import type { PickedItem } from '../src/stores/usePickedItem';
+import type { PickedItem } from '../src/stores/usePickedItemStore';
 import type { OrderItem } from '../src/stores/useShoppingCartStore';
 
 export default function calculateItemPrice(item: PickedItem | OrderItem) {

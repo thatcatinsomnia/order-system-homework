@@ -1,8 +1,8 @@
-import type { Item } from '../hooks/useVenderProducts';
+import type { Item, Variant } from '../hooks/useVenderProducts';
 import { create } from 'zustand';
 
 export type PickedItem = {
-  id: string;
+  id?: string;
   vender: string;
   customer: string;
   note: string;
@@ -15,7 +15,6 @@ type State = PickedItem;
 const MINIMUM_QUANTITY = 1;
 
 const initialState = {
-  id: '',
   vender: '',
   customer: '',
   note: '',
@@ -42,7 +41,22 @@ export const decrease = () => usePickedItemStore.setState(state => {
   };
 });
 
-export const pickItem = (item: Item) => usePickedItemStore.setState({ item });
+export const pickItem = (item: PickedItem) => usePickedItemStore.setState(() => {
+  return {
+    ...item
+  }
+});
+
+export const updateVariants = (variants: Variant[]) => usePickedItemStore.setState((state) => {
+  const updatedItem = {
+    ...state.item,
+    variants
+  };
+
+  return {
+    item: updatedItem as Item
+  }
+});
 
 export const clearPickedItem = () => usePickedItemStore.setState({ ...initialState });
 

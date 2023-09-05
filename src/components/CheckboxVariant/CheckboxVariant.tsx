@@ -2,7 +2,7 @@ import type { Item } from '../../hooks/useVenderProducts';
 import type { VariantCheckbox } from '../../hooks/useVenderProducts';
 import { FiCheck } from 'react-icons/fi';
 import { Switch } from '@headlessui/react';
-import usePickedItemStore, { pickItem } from '../../stores/usePickedItem';
+import usePickedItemStore, { updateVariants } from '../../stores/usePickedItemStore';
 import styles from './checkboxVariant.module.css';
 
 type Props = {
@@ -29,10 +29,7 @@ export default function CheckboxVariant({ variant }: Props) {
       return v;
     });
 
-    pickItem({
-      ...item,
-      variants: updatedVariants
-    });
+    updateVariants(updatedVariants);
   }
 
   return (

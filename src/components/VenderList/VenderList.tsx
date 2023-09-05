@@ -25,14 +25,13 @@ export default function VenderList() {
     return <FetchErrorMessage error={error} />
   }
 
-
-  const isEmptyData = (!data || !data?.pages.length) && !isLoading;
+  const isEmptyData = (!data || !data.pages.length);
 
   return (
     <div className={styles.container}>
       <div className={styles.venderList}>
         {isEmptyData ? "No Venders Data" : (
-          data?.pages.map(group => (
+          data.pages.map(group => (
             group.data.map(vender => (
               <Vender key={vender.id} vender={vender} />
             ))

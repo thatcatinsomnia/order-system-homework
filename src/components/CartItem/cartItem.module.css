@@ -33,21 +33,56 @@
   overflow: hidden;
 }
 
-.cartItemHeader {
+
+.header {
   display: flex;
   flex-direction: column;
-}
-
-@media screen and (min-width: 576px) {
-  .cartItemHeader {
-    flex-direction: row;
-  }
 }
 
 .title {
   font-size: 20px;
   font-weight: bold;
   color: hsl(231, 17%, 30%);
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+}
+
+.itemName {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.actionBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.deleteButton {
+  --size: 28px;
+  margin-left: auto;
+  width: var(--size);
+  height: var(--size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius);
+  background: white;
+  line-height: 1;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+.deleteButton:hover {
+  background: var(--color-hover-hint);
 }
 
 .price {
@@ -56,18 +91,18 @@
 }
 
 .quantityBox {
-  margin-left: auto;
   display: flex;
   align-items: center;
 }
 
 .quantityButton {
-  --size: 32px;
+  --size: 26px;
+
   width: var(--size);
   height: var(--size);
   display: grid;
   place-items: center;
-  background: none;
+  background: hsl(352deg 62.46% 64.73% / 8.2%);
   border: none;
   cursor: pointer;
   color: var(--color-primary);
@@ -84,14 +119,15 @@
   text-align: center;
 }
 
-.cartItemFooter {
+
+.footer {
   margin-top: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.cartItemEditButton {
+.editButton {
   padding: 4px 4px;
   background: none;
   border: 1px solid var(--color-primary);
@@ -102,12 +138,12 @@
   align-items: center;
   gap: 4px;
   cursor: pointer;
-  transition: 
-    background-color 200ms ease
+  transition:
+    background-color 200ms ease,
     color 200ms ease;
 }
 
-.cartItemEditButton:hover {
+.editButton:hover {
   color: white;
   background: hsl(352, 85%, 65%);
 }

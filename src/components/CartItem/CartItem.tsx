@@ -1,57 +1,72 @@
 import type { OrderItem } from '../../stores/useShoppingCartStore';
-import { FiMinus, FiPlus, FiEdit as FiEdit } from 'react-icons/fi';
+import { FiMinus, FiPlus, FiEdit, FiTrash2 as FiTrash } from 'react-icons/fi';
 import calculateItemPrice from '../../../helper/calculateItemPrice';
-import { decrease, increase, setEditItem } from '../../stores/useShoppingCartStore';
+import { pickItem } from '../../stores/usePickedItemStore';
+import { increaseById, decreaseById, deleteById } from '../../stores/useShoppingCartStore';
 import CartItemVariants from '../CartItemVariants/CartItemVariants';
 import styles from './cartItem.module.css';
 
 type Props = {
-  item: OrderItem;
+  orderItem: OrderItem;
 };
 
-export default function CartItem({ item }: Props) {
-  const totalPrice = calculateItemPrice(item);
+export default function CartItem({ orderItem }: Props) {
+  const totalPrice = calculateItemPrice(orderItem);
+
+  const handleDelete = () => {
+    const yes = confirm(`delete ${orderItem.id} ?`);
+
+    if (yes) {
+      deleteById(orderItem.id);
+    }
+  };
 
   return (
-    <div className={styles.cartItem}>
+    <li className={styles.cartItem}>
       <div className={styles.imgBox}>
-        <img src="https://loremflickr.com/140/140/drinks,meals" alt={item.item.name}/>
+        <img src="https://loremflickr.com/140/140/drinks,meals" alt={orderItem.item.name}/>
       </div>
 
       <div className={styles.content}>
-        <div className={styles.cartItemHeader}>
-          <p className={styles.title}>{item.item.name}</p>
+        <div className={styles.header}>
+          <div className={styles.title}>
+            <p className={styles.itemName}>{orderItem.item.name}</p>
+            <button className={styles.deleteButton} onClick={handleDelete}><FiTrash size={14} /></button>
+          </div>
+
           <div className={styles.quantityBox}>
-            <button 
+            <button
               className={styles.quantityButton}
-              onClick={() => decrease(item.id)}
+              onClick={() => decreaseById(orderItem.id)}
             >
               <FiMinus />
             </button>
-            <span className={styles.quantity}>{item.quantity}</span>
-            <button 
+            <span className={styles.quantity}>{orderItem.quantity}</span>
+            <button
               className={styles.quantityButton}
-              onClick={() => increase(item.id)}
+              onClick={() => increaseById(orderItem.id)}
             >
               <FiPlus />
             </button>
           </div>
         </div>
 
-        <CartItemVariants variants={item.item.variants} />
+        <CartItemVariants variants={orderItem.item.variants} />
 
-        <div className={styles.cartItemFooter}>
-          <button 
-            className={styles.cartItemEditButton}
-            onClick={() => setEditItem(item)}
+        <div className={styles.footer}>
+          <button
+            className={styles.editButton}
+            onClick={() => pickItem(orderItem)}
           >
             <span>編輯</span>
             <FiEdit />
           </button>
-          <p className={styles.price}>${totalPrice}</p>
-        </div>
 
+          <p className={styles.price}>
+            ${totalPrice}
+          </p>
+        </div>
       </div>
-    </div>
+    </li>
   );
 }

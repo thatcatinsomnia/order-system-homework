@@ -11,7 +11,7 @@ export default function Vender({ vender }: Props) {
     <Link 
       className={styles.vender}
       to={`/venders/${vender.id}/products`}
-      state={{ venderName: vender.name }}
+      state={{ vender: vender.name }}
     >
       <div className={styles.imgBox}>
         <img src={vender.image} alt={vender.name} />

@@ -1,11 +1,11 @@
 .container {
   --footer-height: 68px;
-
+  --max-width: 760px;
   margin: 0 auto;
 
   /* add bottom gap to make shoppingCartItem visible */
   padding: var(--gap-edge) var(--gap-edge) calc(var(--footer-height) + 20px);
-  max-width: 760px;
+  max-width: var(--max-width);
 }
 
 .title {
@@ -50,23 +50,41 @@
   background: var(--color-primary-2);
 }
 
-.cta {
+.ctaWrapper {
   margin-top: auto;
   padding: var(--gap-edge);
-  width: 100%;
   height: var(--footer-height); /* inherit from .container */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  width: 100%;
+  background: white;
   position: fixed;
   bottom: 0;
   left: 0;
-  background: white;
   box-shadow: 0px -2px 6px -2px hsl(245, 14%, 18%, 0.1);
+}
+
+.cta {
+  margin: 0 auto;
+  max-width: var(--max-width);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .price {
   font-size: 16px;
+  line-height: 1.2;
+  color: hsl(225, 11.22%, 19.96%);
+}
+
+.total {
+  font-size: 20px;
+}
+
+.fee {
+  font-size: 12px;
+  /* color: hsl(0, 100%, 50%); */
+  color: hsl(218, 16%, 29%);
 }
 
 .cta > button {

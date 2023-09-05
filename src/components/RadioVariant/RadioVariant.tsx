@@ -1,7 +1,7 @@
 import type { Item, Option } from '../../hooks/useVenderProducts';
 import type { VariantRadio } from "../../hooks/useVenderProducts";
 import { RadioGroup } from '@headlessui/react';
-import useSelectedItemStore, { pickItem } from "../../stores/usePickedItem";
+import useSelectedItemStore, { updateVariants } from "../../stores/usePickedItemStore";
 import styles from './radioVariant.module.css';
 
 type Props = {
@@ -23,10 +23,7 @@ export default function RadioVariant({ variant }: Props) {
       return {...v};
     });
 
-    pickItem({
-      ...item,
-      variants: updatedVariants
-    });
+    updateVariants(updatedVariants);
   };
 
   return (
@@ -35,7 +32,7 @@ export default function RadioVariant({ variant }: Props) {
         {variant.name}
         <span className={styles.variantPrice}>{variant.price === -1 ? 'FREE' : `$${variant.price}`}</span>
       </p>
-      <RadioGroup name={variant.name} onChange={handleRadioChange}>
+      <RadioGroup name={variant.name} onChange={handleRadioChange} defaultValue={variant.selected || ''}>
         {variant.options.map(option => <Option key={option.value} option={option} />)}
       </RadioGroup>
     </>

@@ -1,5 +1,5 @@
-import type { PickedItem } from '../../stores/usePickedItem';
-import{ decrease, increase } from '../../stores/usePickedItem';
+import type { PickedItem } from '../../stores/usePickedItemStore';
+import{ decrease, increase } from '../../stores/usePickedItemStore';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import calculateItemPrice from '../../../helper/calculateItemPrice';
 import ProductVariants from '../ProductVariants';
@@ -8,12 +8,13 @@ import styles from './itemDetail.module.css';
 
 type Props = {
   item: PickedItem;
-  onAddToShoppingCart?: () => void;
-  onUpdateCustomer?: (customer: string) => void;
-  onUpdateNote?: (note: string) => void;
+  onUpdateShoppingCart?: () => void;
+  onUpdateCustomer: (customer: string) => void;
+  onUpdateNote: (note: string) => void;
+  isEdit?: boolean;
 };
 
-export default function ItemDetail({ item, onAddToShoppingCart, onUpdateNote, onUpdateCustomer }: Props) {
+export default function ItemDetail({ item, onUpdateShoppingCart, onUpdateNote, onUpdateCustomer, isEdit = false }: Props) {
   const totalPrice = calculateItemPrice(item);
 
   return (
@@ -45,7 +46,7 @@ export default function ItemDetail({ item, onAddToShoppingCart, onUpdateNote, on
           <input value={item.customer} onChange={e => onUpdateCustomer(e.target.value)} />
         </label>
       </div>
-      
+
       <div className={styles.modalCTA}>
         <div className={styles.modalQuantityBox}>
           <button className={styles.modalQuantityButton} onClick={decrease}>
@@ -56,11 +57,11 @@ export default function ItemDetail({ item, onAddToShoppingCart, onUpdateNote, on
             <FiPlus />
           </button>
         </div>
-        <button 
+        <button
           className={styles.modalSubmitButton}
-          onClick={onAddToShoppingCart}
+          onClick={onUpdateShoppingCart}
         >
-          加到購物車
+          { isEdit ? '更新購物車' : '加到購物車'}
         </button>
       </div>
     </div>

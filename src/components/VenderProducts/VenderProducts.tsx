@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import randomId from '../../../helper/randomId';
 import useVenderProducts from '../../hooks/useVenderProducts';
 import VenderProductsSkeleton from '../VenderProductsSkeleton';
-import usePickedItem, { pickItem, clearPickedItem, updateCustomer, updateNote } from '../../stores/usePickedItem';
+import usePickedItem, { pickItem, clearPickedItem, updateCustomer, updateNote } from '../../stores/usePickedItemStore';
 import { addToShoppingCart } from '../../stores/useShoppingCartStore';
 import FetchErrorMessage from '../FetchErrorMessage';
 import ProductItem from '../ProductItem';
@@ -12,8 +12,8 @@ import Modal from '../Modal';
 import styles from './venderProducts.module.css';
 
 export default function VenderProducts() {
-  // we need to match the vender name in detail page, 
-  // don't do this in real world 
+  // we need to match the vender name in detail page,
+  // don't do this in real world
   const { state } = useLocation();
   const { venderName } = state;
 
@@ -29,8 +29,14 @@ export default function VenderProducts() {
     return <FetchErrorMessage error={error} />
   }
 
-  const handleSelectItem = (item: Item) => {
-    pickItem(item);
+  const handlePickItem = (item: Item) => {
+    pickItem({
+      vender: venderName,
+      customer: '',
+      note: '',
+      item: item,
+      quantity: 1
+    });
   };
 
   const onModalClose = () => {
@@ -38,19 +44,25 @@ export default function VenderProducts() {
   };
 
   const handleAddToShoppingCart = () => {
-    if (!pickedItem.customer) {
-      // TODO: show alert - customer field is required.
-      alert('please typing customer field.')
+    if (!pickedItem.item) {
       return;
     }
-    
+
+    if (!pickedItem.customer) {
+      // TODO: show alert - customer field is required.
+      alert('customer is reuqired')
+      return;
+    }
+
+    const { vender, customer, note, item, quantity } = pickedItem;
+
     addToShoppingCart({
       id: randomId(),
-      vender: venderName,
-      customer: pickedItem.customer,
-      note: pickedItem.note,
-      item: pickedItem.item as Item,
-      quantity: pickedItem.quantity
+      vender,
+      customer,
+      note,
+      item,
+      quantity
     });
 
     onModalClose();
@@ -72,19 +84,18 @@ export default function VenderProducts() {
               <p className={styles.category}>{product.category} 🎉</p>
 
               <ul className={styles.productItems}>
-                {product.items.map(item => <ProductItem key={item.id} item={item} onSelectItem={handleSelectItem} />)}
+                {product.items.map(item => <ProductItem key={item.id} item={item} onPickItem={handlePickItem} />)}
               </ul>
             </div>
           ))}
         </div>
       </div>
 
-      
       {!!pickedItem.item && (
         <Modal isOpen={!!pickedItem.item} onClose={onModalClose}>
-          <ItemDetail 
+          <ItemDetail
             item={pickedItem}
-            onAddToShoppingCart={handleAddToShoppingCart}
+            onUpdateShoppingCart={handleAddToShoppingCart}
             onUpdateCustomer={updateCustomer}
             onUpdateNote={updateNote}
           />

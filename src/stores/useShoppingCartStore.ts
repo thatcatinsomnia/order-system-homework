@@ -4,7 +4,6 @@ import { create } from 'zustand';
 
 type State = {
   cart: OrderItem[] | [];
-  editItem: OrderItem | null;
 };
 
 export type OrderItem = {
@@ -42,7 +41,22 @@ export const addToShoppingCart = (newOrderItem: OrderItem) => useShoppingCartSto
   }
 });
 
-export const decrease = (id: OrderItem['id']) => useShoppingCartStore.setState(state => {
+// find the order item then update the content
+export const updateShoppingCart = (updatedOrderItem: OrderItem) => useShoppingCartStore.setState(state => {
+  const updatedCart = state.cart.map(orderItem => {
+    if (orderItem.id === updatedOrderItem.id) {
+      return updatedOrderItem
+    }
+
+    return orderItem;
+  });
+
+  return {
+    cart: updatedCart
+  }
+});
+
+export const decreaseById = (id: OrderItem['id']) => useShoppingCartStore.setState(state => {
   const updatedCart = state.cart.map(item => {
     if (item.id === id && item.quantity > MINIMUM_QUANTITY) {
       item.quantity = item.quantity - 1;
@@ -54,7 +68,7 @@ export const decrease = (id: OrderItem['id']) => useShoppingCartStore.setState(s
   return { cart: updatedCart }
 });
 
-export const increase = (id: OrderItem['id']) => useShoppingCartStore.setState(state => {
+export const increaseById = (id: OrderItem['id']) => useShoppingCartStore.setState(state => {
   const updatedCart = state.cart.map(item => {
     if (item.id === id) {
       item.quantity = item.quantity + 1;
@@ -66,14 +80,8 @@ export const increase = (id: OrderItem['id']) => useShoppingCartStore.setState(s
   return { cart: updatedCart }
 });
 
-export const setEditItem = (item: OrderItem) => useShoppingCartStore.setState(state => ({
-  editItem: item
+export const deleteById = (id: string) => useShoppingCartStore.setState(state => ({
+  cart: state.cart.filter(orderItem => orderItem.id !== id)
 }));
-
-export const clearEditItem = () => useShoppingCartStore.setState(() => {
-  return {
-    editItem: null
-  }
-});
 
 export default useShoppingCartStore;
