@@ -1,10 +1,13 @@
 import Layout from '../components/Layout';
+import PageTransition from '../components/PageTransiton';
 import VenderProducts from '../components/VenderProducts';
 
 export default function Vender() {
   return (
     <Layout>
-      <VenderProducts />
+      <PageTransition>
+        <VenderProducts />
+      </PageTransition>
     </Layout>
   );
 }
