@@ -71,7 +71,12 @@ export default function ItemDetail({ item, onUpdateShoppingCart, onUpdateNote, o
     <div className={styles.wrapper}>
       <div className={styles.imgBox}>
         <div className={styles.backdrop} />
-        <img className={styles.img} src="https://loremflickr.com/800/600/drinks,meals" alt={item.item?.name} />
+        <img
+          className={styles.img}
+          src="https://loremflickr.com/800/600/drinks,meals" alt={item.item?.name}
+          width={486}
+          height={320}
+        />
       </div>
 
       <div className={styles.header}>
