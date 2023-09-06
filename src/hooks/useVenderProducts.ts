@@ -28,6 +28,7 @@ export type VariantRadio = {
   price: number;
   options: Option[];
   selected?: string;
+  isRequired: boolean;
 };
 
 export type VariantCheckbox = {
@@ -50,7 +51,7 @@ const url = 'http://localhost:3000/vender-detail';
 
 async function fetchVenderProducts() {
   const res = await axios.get(url);
-  
+
   if (res.status !== 200) {
     throw new Error('can\'t fetch venders data from json server. 😰');
   }
@@ -61,12 +62,9 @@ async function fetchVenderProducts() {
 }
 
 export default function useVenderProducts() {
-  // use random() to generate fake id to get random data
-  const id = 1;
-  
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['venders', id],
-    queryFn: () => fetchVenderProducts(id),
+    queryKey: ['venders', 1],
+    queryFn: () => fetchVenderProducts(),
     retry: false
   });
 

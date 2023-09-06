@@ -16,11 +16,30 @@
   font-size: 16px;
   display: flex;
   align-items: center;
+  position: relative;
+  transition: all 200ms ease-out;
+}
+
+.variantName > div {
+  position: relative;
 }
 
 .variantPrice {
   margin-left: auto;
   font-size: 14px;
+}
+
+.error {
+  color: var(--color-error);
+}
+
+.errorMessage {
+  margin-left: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-error);
+  line-height: 1;
 }
 
 .radio {

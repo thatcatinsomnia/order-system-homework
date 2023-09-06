@@ -1,9 +1,9 @@
 import type { OrderItem } from '../../stores/useShoppingCartStore';
 import { FiMinus, FiPlus, FiEdit, FiTrash2 as FiTrash } from 'react-icons/fi';
-import calculateItemPrice from '../../../helper/calculateItemPrice';
+import calculateItemPrice from '../..//helper/calculateItemPrice';
 import { pickItem } from '../../stores/usePickedItemStore';
 import { increaseById, decreaseById, deleteById } from '../../stores/useShoppingCartStore';
-import CartItemVariants from '../CartItemVariants/CartItemVariants';
+import CartItemVariants from '../CartItemVariants';
 import styles from './cartItem.module.css';
 
 type Props = {

@@ -1009,6 +1009,7 @@
                 {
                   "id": 5,
                   "type": "radio",
+                  "isRequired": true,
                   "name": "甜度",
                   "price": -1,
                   "options": [
@@ -1037,6 +1038,7 @@
                 {
                   "id": 6,
                   "type": "radio",
+                  "isRequired": true,
                   "name": "冰量",
                   "price": -1,
                   "options": [
@@ -1078,6 +1080,7 @@
                 {
                   "id": 5,
                   "type": "radio",
+                  "isRequired": true,
                   "name": "甜度",
                   "price": -1,
                   "options": [
@@ -1106,6 +1109,7 @@
                 {
                   "id": 6,
                   "type": "radio",
+                  "isRequired": true,
                   "name": "冰量",
                   "price": -1,
                   "options": [
@@ -1147,6 +1151,7 @@
                 {
                   "id": 5,
                   "type": "radio",
+                  "isRequired": true,
                   "name": "甜度",
                   "price": -1,
                   "options": [
@@ -1175,6 +1180,7 @@
                 {
                   "id": 6,
                   "type": "radio",
+                  "isRequired": true,
                   "name": "冰量",
                   "price": -1,
                   "options": [
@@ -1216,6 +1222,7 @@
                 {
                   "id": 5,
                   "type": "radio",
+                  "isRequired": true,
                   "name": "甜度",
                   "price": -1,
                   "options": [
@@ -1244,6 +1251,7 @@
                 {
                   "id": 6,
                   "type": "radio",
+                  "isRequired": true,
                   "name": "冰量",
                   "price": -1,
                   "options": [

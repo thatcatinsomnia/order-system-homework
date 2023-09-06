@@ -13,7 +13,7 @@ export default function CartItemVariants({ variants }: Props) {
 
     return variant.selected;
   }).filter(text => text);
-  
+
   return (
     <p className={styles.variants}>{variantsText.join('; ')}</p>
   );
