@@ -18,6 +18,8 @@
   --color-bg-error: hsl(0deg 53.68% 74.82% / 37%);
 
   --border-light: 1px solid hsl(352deg 1.09% 83.43%);
+
+  --scrollbar-width: calc(100vw - 100%);
 }
 
 .animate-skeleton {

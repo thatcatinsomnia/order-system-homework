@@ -1,6 +1,6 @@
 import type { OrderItem } from '../../stores/useShoppingCartStore';
 import { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FiMinus, FiPlus, FiEdit, FiTrash2 as FiTrash } from 'react-icons/fi';
 import calculateItemPrice from '../..//helper/calculateItemPrice';
 import { pickItem } from '../../stores/usePickedItemStore';
@@ -13,6 +13,21 @@ type Props = {
   orderItem: OrderItem;
 };
 
+// framer motion variants
+const item = { 
+  hidden: { 
+    x: 32, 
+    opacity: 0 
+  },
+  visible: { 
+    x: 0, 
+    opacity: 1,
+    transition: {
+      duration: 0.4
+    }
+  }
+};
+
 export default function CartItem({ orderItem }: Props) {
   const totalPrice = calculateItemPrice(orderItem);
   const [isOpened, setIsOpened] = useState(false);
@@ -23,7 +38,10 @@ export default function CartItem({ orderItem }: Props) {
 
   return (
     <>
-      <li className={styles.cartItem}>
+      <motion.li 
+        className={styles.cartItem}
+        variants={item}
+      >
         <div className={styles.imgBox}>
           <img src="https://loremflickr.com/140/140/drinks,meals" alt={orderItem.item.name}/>
         </div>
@@ -68,7 +86,7 @@ export default function CartItem({ orderItem }: Props) {
             </p>
           </div>
         </div>
-      </li>
+      </motion.li>
 
       <Modal
         isOpen={isOpened}

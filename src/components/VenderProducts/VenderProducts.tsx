@@ -1,6 +1,6 @@
 import type { Item } from '../../hooks/useVenderProducts';
 import { useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import randomId from '../../helper/randomId';
 import useVenderProducts from '../../hooks/useVenderProducts';
 import VenderProductsSkeleton from '../../components/VenderProductsSkeleton';
@@ -17,6 +17,19 @@ import ProductItem from '../../components/ProductItem';
 import ItemDetail from '../../components/ItemDetail';
 import Modal from '../../components/Modal';
 import styles from './venderProducts.module.css';
+
+// framer-motoin variants
+const ul = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.04,
+    }
+  }
+};
 
 export default function VenderProducts() {
   // we need to match the vender name in detail page,
@@ -76,14 +89,22 @@ export default function VenderProducts() {
         <p className={styles.title}>{venderName}</p>
         <p className={styles.description}>{data?.description}</p>
 
-        <div className={styles.products}>
+        <div 
+          className={styles.products}
+
+        >
           {data?.products.map(product => (
-            <div className={styles.product} key={product.id}>
+            <div key={product.id} className={styles.product}>
               <p className={styles.category}>{product.category} 🎉</p>
 
-              <ul className={styles.productItems}>
+              <motion.ul 
+                className={styles.productItems}
+                initial="hidden"
+                animate="visible"
+                variants={ul}
+              >
                 {product.items.map(item => <ProductItem key={item.id} item={item} onPickItem={handlePickItem} />)}
-              </ul>
+              </motion.ul>
             </div>
           ))}
         </div>

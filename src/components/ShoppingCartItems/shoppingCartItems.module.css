@@ -1,11 +1,14 @@
 .container {
-  --footer-height: 68px;
+  --footer-height: 80px;
   --max-width: 760px;
   margin: 0 auto;
 
   /* add bottom gap to make shoppingCartItem visible */
   padding: var(--gap-edge) var(--gap-edge) calc(var(--footer-height) + 20px);
   max-width: var(--max-width);
+
+  /* prevent animation trigger scroll bar on x-axis */
+  overflow-x: hidden;
 }
 
 .title {
@@ -51,18 +54,20 @@
 }
 
 .ctaWrapper {
-  margin-top: auto;
-  padding: var(--gap-edge);
-  height: var(--footer-height); /* inherit from .container */
   width: 100%;
+  height: var(--footer-height); /* inherit from .container */
   background: white;
   position: fixed;
   bottom: 0;
   left: 0;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
   box-shadow: 0px -2px 6px -2px hsl(245, 14%, 18%, 0.1);
 }
 
 .cta {
+  padding: var(--gap-edge);
   margin: 0 auto;
   max-width: var(--max-width);
   width: 100%;

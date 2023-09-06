@@ -1,5 +1,6 @@
 import type { OrderItem } from '../../stores/useShoppingCartStore';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import calculateItemPrice from '../../helper/calculateItemPrice';
 import useShoppingCartStore, { updateShoppingCart } from '../../stores/useShoppingCartStore';
 import usePickedItemStore, { updateCustomer, updateNote, clearPickedItem } from '../../stores/usePickedItemStore';
@@ -9,6 +10,20 @@ import Modal from '../Modal';
 import styles from './shoppingCartItems.module.css';
 
 const FEE = 99;
+
+// framer-motion animation variants
+const list = { 
+  hidden: { 
+    opacity: 0
+  }, 
+  visible: { 
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.04
+    }
+  },
+
+};
 
 function calculateItemCount(cart: OrderItem[]) {
   if (cart.length === 0) {
@@ -52,13 +67,25 @@ export default function ShoppingCartItems() {
     );
   }
 
+  const isOpened = !!pickedItem.item;
+
   return (
     <>
       <div className={styles.container}>
         <h3 className={styles.title}>{venderName}</h3>
-        <ul className={styles.cartList}>
-          {shoppingCart.map(orderItem => <CartItem key={orderItem.id} orderItem={orderItem} />)}
-        </ul>
+        <motion.ul 
+          className={styles.cartList}
+          initial="hidden"
+          animate="visible"
+          variants={list}
+        >
+          {shoppingCart.map(orderItem => (
+            <CartItem
+              key={orderItem.id}
+              orderItem={orderItem} 
+            />
+          ))}
+        </motion.ul>
 
         <div className={styles.ctaWrapper}>
           <div className={styles.cta}>
@@ -71,17 +98,15 @@ export default function ShoppingCartItems() {
           </div>
         </div>
 
-      {!!pickedItem.item && (
-        <Modal isOpen={!!pickedItem.item} onClose={clearPickedItem}>
-          <ItemDetail
-            item={pickedItem}
-            onUpdateCustomer={(customer) => updateCustomer(customer)}
-            onUpdateNote={(note) => updateNote(note)}
-            onUpdateShoppingCart={handleUpdateShoppingCart}
-            isEdit={!!pickedItem.id}
-          />
-        </Modal>
-      )}
+      <Modal isOpen={isOpened} onClose={clearPickedItem}>
+        <ItemDetail
+          item={pickedItem}
+          onUpdateCustomer={(customer) => updateCustomer(customer)}
+          onUpdateNote={(note) => updateNote(note)}
+          onUpdateShoppingCart={handleUpdateShoppingCart}
+          isEdit={!!pickedItem.id}
+        />
+      </Modal>
     </>
   );
 }
