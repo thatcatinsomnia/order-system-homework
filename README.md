@@ -23,11 +23,10 @@
 ## 功能
 - [x] 店家餐點列表
 - [x] 加到購物車
-   - [ ] input 限制
+   - [x] input 限制
 - [x] 修改購物車商品
-   - [ ] 當數量小於 1 時，跳出刪除提示
-   - [ ] input 限制
+   - [x] input 限制
 - [x] 移除購物車商品
-   - [ ] alert 刪除提示
+   - [x] alert 刪除提示
 - [ ] animation
 - [ ] Testing
