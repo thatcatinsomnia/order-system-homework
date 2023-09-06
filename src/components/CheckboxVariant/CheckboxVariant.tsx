@@ -1,4 +1,4 @@
-import type { Item } from '../../hooks/useVenderProducts';
+import type { Item, Variant } from '../../hooks/useVenderProducts';
 import type { VariantCheckbox } from '../../hooks/useVenderProducts';
 import { FiCheck } from 'react-icons/fi';
 import { Switch } from '@headlessui/react';
@@ -9,15 +9,31 @@ type Props = {
   variant: VariantCheckbox;
 };
 
+function findExistVariant(item: Item | null, variantId: number) {
+  if (!item) {
+    return null;
+  }
+
+  return item.variants.find(v => (v.id === variantId)) as VariantCheckbox;
+}
+
+function isCheckedFoundVariant(foundVariant: VariantCheckbox | null) {
+  if (!foundVariant) {
+    return false;
+  }
+
+  return foundVariant.isChecked || false;
+}
+
 export default function CheckboxVariant({ variant }: Props) {
-  const item = usePickedItemStore(state => state.item as Item);
+  const item = usePickedItemStore(state => state.item);
 
-  const foundVariant = item.variants.find(v => (v.id === variant.id)) as VariantCheckbox;
+  const foundVariant = findExistVariant(item, variant.id);
 
-  const { isChecked } = foundVariant;
+  const isChecked = isCheckedFoundVariant(foundVariant);
 
   const handleCheckboxChange = (checked: boolean) => {
-    const updatedVariants = item.variants.map(v => {
+    const updatedVariants = item?.variants.map(v => {
       if (v.id === variant.id && variant.type === 'checkbox') {
         return {
           ...v,
@@ -28,7 +44,7 @@ export default function CheckboxVariant({ variant }: Props) {
       return v;
     });
 
-    updateVariants(updatedVariants);
+    updateVariants(updatedVariants as Variant[]);
   }
 
   return (
@@ -36,7 +52,7 @@ export default function CheckboxVariant({ variant }: Props) {
       <Switch.Label className={styles.checkboxLabel}>
         <Switch
           className={`${styles.checkboxRectangle} ${isChecked ? styles.checked : ''}`}
-          checked={isChecked || false}
+          checked={isChecked}
           onChange={handleCheckboxChange}
         >
           {isChecked && <FiCheck />}

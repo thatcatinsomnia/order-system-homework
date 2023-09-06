@@ -1,5 +1,6 @@
 import type { Item } from '../../hooks/useVenderProducts';
 import { useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import randomId from '../../helper/randomId';
 import useVenderProducts from '../../hooks/useVenderProducts';
 import VenderProductsSkeleton from '../../components/VenderProductsSkeleton';
@@ -88,16 +89,14 @@ export default function VenderProducts() {
         </div>
       </div>
 
-      {!!pickedItem.item && (
-        <Modal isOpen={!!pickedItem.item} onClose={onModalClose}>
-          <ItemDetail
-            item={pickedItem}
-            onUpdateShoppingCart={handleAddToShoppingCart}
-            onUpdateCustomer={updateCustomer}
-            onUpdateNote={updateNote}
-          />
-        </Modal>
-      )}
+      <Modal isOpen={!!pickedItem.item} onClose={onModalClose}>
+        <ItemDetail
+          item={pickedItem}
+          onUpdateShoppingCart={handleAddToShoppingCart}
+          onUpdateCustomer={updateCustomer}
+          onUpdateNote={updateNote}
+        />
+      </Modal>
     </div>
   );
 }

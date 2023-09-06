@@ -1,5 +1,6 @@
 import type { OrderItem } from '../../stores/useShoppingCartStore';
 import { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { FiMinus, FiPlus, FiEdit, FiTrash2 as FiTrash } from 'react-icons/fi';
 import calculateItemPrice from '../..//helper/calculateItemPrice';
 import { pickItem } from '../../stores/usePickedItemStore';
@@ -69,7 +70,10 @@ export default function CartItem({ orderItem }: Props) {
         </div>
       </li>
 
-      <Modal isOpen={isOpened} onClose={handleModalClose}>
+      <Modal
+        isOpen={isOpened}
+        onClose={handleModalClose}
+      >
         <div className={styles.modalContent}>
           <p>是否要刪除該筆餐點 ?</p>
           <div className={styles.cta}>
