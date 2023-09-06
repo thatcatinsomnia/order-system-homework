@@ -1,7 +1,11 @@
 import type { Item, Option } from '../../hooks/useVenderProducts';
 import type { VariantRadio } from "../../hooks/useVenderProducts";
+import { useRef, useEffect } from 'react';
+import { FiAlertCircle } from 'react-icons/fi';
 import { RadioGroup } from '@headlessui/react';
 import useSelectedItemStore, { updateVariants } from "../../stores/usePickedItemStore";
+import { setInputRef, setError } from '../../stores/useInputErrorStore';
+import useInputErrorStore from '../../stores/useInputErrorStore';
 import styles from './radioVariant.module.css';
 
 type Props = {
@@ -9,11 +13,19 @@ type Props = {
 };
 
 export default function RadioVariant({ variant }: Props) {
+  const ref = useRef<HTMLElement>(null);
   const item = useSelectedItemStore(state => state.item as Item);
-  
-  const handleRadioChange = (value: string) => {
+  const errors = useInputErrorStore(state => state.errors);
+
+  useEffect(() => {
+    if(ref.current) {
+      setInputRef(variant.name, ref.current);
+    }
+  }, []);
+
+  const handleRadioChange = (name: string, value: string) => {
     const updatedVariants = item.variants.map(v => {
-      if (v.type === 'radio' && v.id === variant.id) {
+      if (v.type === 'radio' && v.id === variant.id && v.name === variant.name) {
         return {
           ...v,
           selected: value
@@ -24,15 +36,30 @@ export default function RadioVariant({ variant }: Props) {
     });
 
     updateVariants(updatedVariants);
+
+    if (errors[name] && errors[name]?.key) {
+      setError(name, null);
+    }
   };
+
+  const variantError = errors?.[variant.name];
 
   return (
     <>
-      <p className={styles.variantName}>
-        {variant.name}
+      <div className={styles.variantName}>
+        <span>
+          {variant.name}
+          {variantError?.key && <small className={`${styles.errorMessage} animate-text-shake`}><FiAlertCircle />{variantError.message}</small>}
+        </span>
         <span className={styles.variantPrice}>{variant.price === -1 ? 'FREE' : `$${variant.price}`}</span>
-      </p>
-      <RadioGroup name={variant.name} onChange={handleRadioChange} defaultValue={variant.selected || ''}>
+      </div>
+      <RadioGroup
+        id={variant.name}
+        name={variant.name}
+        onChange={(value: string) => handleRadioChange(variant.name, value)}
+        defaultValue={variant.selected || ''}
+        ref={ref}
+      >
         {variant.options.map(option => <Option key={option.value} option={option} />)}
       </RadioGroup>
     </>

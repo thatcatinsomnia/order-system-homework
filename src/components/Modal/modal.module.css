@@ -39,7 +39,7 @@
 .panel {
   width: 100%;
   max-width: 486px;
-  
+
   /* set relative so close button can position with it */
   position: relative;
   background: white;
@@ -58,10 +58,10 @@
   background: white;
   border-radius: var(--radius);
   cursor: pointer;
-  color: black;
+  color: hsl(251, 10%, 21%);
 }
 
 .close:hover {
-  background: rgb(237, 203, 223);
-  transition: background-color 0.2s ease;
+  background: hsl(353, 39%, 91%);
+  transition: background-color 200ms ease;
 }

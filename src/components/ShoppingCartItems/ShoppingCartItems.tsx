@@ -1,6 +1,6 @@
 import type { OrderItem } from '../../stores/useShoppingCartStore';
 import { useNavigate } from 'react-router-dom';
-import calculateItemPrice from '../../../helper/calculateItemPrice';
+import calculateItemPrice from '../../helper/calculateItemPrice';
 import useShoppingCartStore, { updateShoppingCart } from '../../stores/useShoppingCartStore';
 import usePickedItemStore, { updateCustomer, updateNote, clearPickedItem } from '../../stores/usePickedItemStore';
 import CartItem from '../CartItem';
@@ -39,11 +39,6 @@ export default function ShoppingCartItems() {
   const navigate = useNavigate();
 
   const handleUpdateShoppingCart = () => {
-    if (!pickedItem.customer) {
-      // TODO: handle alert
-      alert('customer is required.');
-      return;
-    }
     updateShoppingCart(pickedItem as OrderItem);
     clearPickedItem();
   };

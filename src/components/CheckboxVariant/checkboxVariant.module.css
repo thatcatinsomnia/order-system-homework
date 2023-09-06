@@ -28,11 +28,12 @@
   padding: 0;
   width: var(--size);
   height: var(--size);
-  border: 1px solid var(--color-primary);
+  border: var(--border-light);
   border-radius: var(--radius);
   background: none;
   display: grid;
   place-items: center;
+  cursor: pointer;
 }
 
 .checkboxRectangle.checked {

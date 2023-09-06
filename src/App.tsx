@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Home from './pages/Home';
 import Vender from './pages/Vender';
 import ShoppingCart from './pages/ShoppingCart';
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
   {
     path: '/shopping-cart',
     element: <ShoppingCart />
-  },
+  }
 ]);
 
 const queryClient = new QueryClient();

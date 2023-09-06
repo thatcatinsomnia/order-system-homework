@@ -13,16 +13,16 @@ type Props = {
 // use 1.7.14 to prevent the problem
 export default function Modal({ isOpen, onClose, children }: Props) {
   return (
-    <Dialog 
+    <Dialog
       as="div"
-      open={isOpen} 
+      open={isOpen}
       onClose={onClose}
       className={styles.dialog}
     >
       {/* using dedicated element to create overlay */}
       <div className={styles.overlay} aria-hidden="true" />
 
-      <div className={styles.scrollable}>
+      <div className={styles.scrollable} id="modal-srcollable-container">
         <div className={styles.center}>
           <Dialog.Panel className={styles.panel}>
             {children}

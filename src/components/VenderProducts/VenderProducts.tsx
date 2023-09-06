@@ -1,14 +1,20 @@
 import type { Item } from '../../hooks/useVenderProducts';
 import { useLocation } from 'react-router-dom';
-import randomId from '../../../helper/randomId';
+import randomId from '../../helper/randomId';
 import useVenderProducts from '../../hooks/useVenderProducts';
-import VenderProductsSkeleton from '../VenderProductsSkeleton';
-import usePickedItem, { pickItem, clearPickedItem, updateCustomer, updateNote } from '../../stores/usePickedItemStore';
+import VenderProductsSkeleton from '../../components/VenderProductsSkeleton';
+import usePickedItem, {
+  pickItem,
+  clearPickedItem,
+  updateCustomer,
+  updateNote
+} from '../../stores/usePickedItemStore';
 import { addToShoppingCart } from '../../stores/useShoppingCartStore';
-import FetchErrorMessage from '../FetchErrorMessage';
-import ProductItem from '../ProductItem';
-import ItemDetail from '../ItemDetail';
-import Modal from '../Modal';
+import { clearErrors } from '../../stores/useInputErrorStore';
+import FetchErrorMessage from '../../components/FetchErrorMessage';
+import ProductItem from '../../components/ProductItem';
+import ItemDetail from '../../components/ItemDetail';
+import Modal from '../../components/Modal';
 import styles from './venderProducts.module.css';
 
 export default function VenderProducts() {
@@ -40,20 +46,11 @@ export default function VenderProducts() {
   };
 
   const onModalClose = () => {
+    clearErrors();
     clearPickedItem();
   };
 
   const handleAddToShoppingCart = () => {
-    if (!pickedItem.item) {
-      return;
-    }
-
-    if (!pickedItem.customer) {
-      // TODO: show alert - customer field is required.
-      alert('customer is reuqired')
-      return;
-    }
-
     const { vender, customer, note, item, quantity } = pickedItem;
 
     addToShoppingCart({
@@ -61,7 +58,7 @@ export default function VenderProducts() {
       vender,
       customer,
       note,
-      item,
+      item: item as Item,
       quantity
     });
 
