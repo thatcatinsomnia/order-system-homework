@@ -17,34 +17,44 @@
 
 .scrollable {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   overflow-y: auto;
 }
 
 .center {
-  --padding: 24px 12px;
-  padding: var(--padding);
-  min-height: 100%;
+  padding: 24px 0;
+  margin: 0 0.5rem;
+  /*
+    width: auto make the current element expand to fit the content,
+    like original div
+  */
+  width: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100%;
 }
+
+
 
 @media screen and (min-width: 480px) {
   .center {
-    --padding: 24px;
+    margin: 0 auto;
+    max-width: 440px;
   }
 }
 
 .panel {
-  width: 100%;
-  max-width: 486px;
-
   /* set relative so close button can position with it */
   position: relative;
+  width: 100%;
   background: white;
   box-shadow: 1px 1px 6px -2px rgba(0, 0, 0, 0.34);
   border-radius: var(--radius);
+  overflow: hidden;
 }
 
 .close {
@@ -62,6 +72,6 @@
 }
 
 .close:hover {
-  background: hsl(353, 39%, 91%);
+  background: hsl(236, 46%, 93%);
   transition: background-color 200ms ease;
 }
