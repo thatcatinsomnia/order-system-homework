@@ -1,5 +1,6 @@
 .cartItem {
-  margin-bottom: 16px;
+  max-width: var(--max-width);
+  margin: 0 auto;
   width: 100%;
   display: flex;
   background: white;
@@ -83,6 +84,7 @@
 }
 
 .price {
+  display: inline-block;
   margin-right: 8px;
   text-align: right;
 }
@@ -144,57 +146,4 @@
 .editButton:hover {
   color: white;
   background: hsl(352, 85%, 65%);
-}
-
-.modalContent {
-  padding: 16px;
-  width: 100%;
-  height: 260px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.modalContent > p {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  color: rgb(62, 61, 78);
-}
-
-.cta {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}
-
-.cta > button {
-  margin-top: auto;
-  padding: .5em 1.25em;
-  width: 100%;
-  border: none;
-  cursor: pointer;
-  color: white;
-  border-radius: var(--radius);
-  transition: background-color 200ms ease;
-}
-
-.ctaDeleteBtn {
-  background: hsl(357, 93%, 58%);
-}
-
-.ctaDeleteBtn:hover {
-  background: hsl(357, 75%, 48%);
-}
-
-.ctaCancelBtn {
-  background: rgb(109, 108, 124);
-}
-
-.ctaCancelBtn:hover {
-  background: rgb(88, 87, 102);
 }

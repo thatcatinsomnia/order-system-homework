@@ -19,7 +19,7 @@ const MINIMUM_QUANTITY = 1;
 
 const useShoppingCartStore = create<State>()(
   persist(
-    (set, get) => ({
+    (_set, _get) => ({
       cart: [],
       editItem: null
     }),
@@ -80,7 +80,7 @@ export const increaseById = (id: OrderItem['id']) => useShoppingCartStore.setSta
   return { cart: updatedCart }
 });
 
-export const deleteById = (id: string) => useShoppingCartStore.setState(state => ({
+export const deleteById = (id: string | null) => useShoppingCartStore.setState(state => ({
   cart: state.cart.filter(orderItem => orderItem.id !== id)
 }));
 

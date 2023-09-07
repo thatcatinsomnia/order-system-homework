@@ -1,6 +1,7 @@
 import type { ChangeEvent } from 'react';
 import type { PickedItem } from '../../stores/usePickedItemStore';
 import { useRef, useEffect } from 'react';
+import { motion, useSpring } from 'framer-motion';
 import { FiPlus, FiMinus, FiAlertCircle } from 'react-icons/fi';
 import { decrease, increase } from '../../stores/usePickedItemStore';
 import useInputErrorStore, { addError, setError, clearErrors, setInputRef } from '../../stores/useInputErrorStore';
@@ -19,7 +20,12 @@ type Props = {
 };
 
 export default function ItemDetail({ item, onUpdateShoppingCart, onUpdateNote, onUpdateCustomer, isEdit = false }: Props) {
+  const totalPriceRef = useRef<HTMLSpanElement>(null);
   const totalPrice = calculateItemPrice(item);
+
+  // framer-motion animate  numbers
+  const spring = useSpring(totalPrice, { bounce: 0 });
+
   const errors = useInputErrorStore(state => state.errors);
   const inputRefs = useInputErrorStore(state => state.inputRefs);
   const ref = useRef<HTMLInputElement>(null);
@@ -29,6 +35,18 @@ export default function ItemDetail({ item, onUpdateShoppingCart, onUpdateNote, o
       setInputRef('customer', ref.current);
     }
   }, []);
+
+  useEffect(() => {
+    spring.on('change', (latest: number) => {
+      if (totalPriceRef.current) {
+        totalPriceRef.current.textContent = `$${latest.toFixed(0)}`
+      }
+    });
+
+    spring.set(totalPrice);
+
+    return () => spring.clearListeners();
+  }, [totalPrice]);
 
   const handleUpdateShoppingCart = () => {
     let inputErrors = validateVariants(item.item!.variants);
@@ -81,7 +99,7 @@ export default function ItemDetail({ item, onUpdateShoppingCart, onUpdateNote, o
 
       <div className={styles.header}>
         <p className={styles.title}>{item.item?.name}</p>
-        <span className={styles.itemPrice}>${totalPrice}</span>
+        <motion.span className={styles.itemPrice} ref={totalPriceRef}>${totalPrice}</motion.span>
       </div>
 
       <div className={styles.body}>

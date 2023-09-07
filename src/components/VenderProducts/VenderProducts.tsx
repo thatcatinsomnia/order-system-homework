@@ -26,7 +26,9 @@ const ul = {
   visible: {
     opacity: 1,
     transition: {
+      bounce: 0,
       staggerChildren: 0.04,
+      delayChildren: 0.2
     }
   }
 };
@@ -35,7 +37,7 @@ export default function VenderProducts() {
   // we need to match the vender name in detail page,
   // don't do this in real world
   const { state } = useLocation();
-  const { venderName } = state;
+  const { vender } = state;
 
   const { data, isLoading, isError, error } = useVenderProducts();
 
@@ -51,7 +53,7 @@ export default function VenderProducts() {
 
   const handlePickItem = (item: Item) => {
     pickItem({
-      vender: venderName,
+      vender: vender,
       customer: '',
       note: '',
       item: item,
@@ -82,22 +84,43 @@ export default function VenderProducts() {
   return (
     <div>
       <div className={styles.cover}>
-        <img src={data?.cover} alt={venderName} />
+        <img src={data?.cover} alt={vender} />
       </div>
 
       <div className={styles.content}>
-        <p className={styles.title}>{venderName}</p>
-        <p className={styles.description}>{data?.description}</p>
+        <motion.p
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ bounce: 0 }}
+          className={styles.title}
+        >
+          {vender}
+        </motion.p>
 
-        <div 
+        <motion.p
+          className={styles.description}
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.03, bounce: 0 }}
+        >
+          {data?.description}
+        </motion.p>
+
+        <div
           className={styles.products}
-
         >
           {data?.products.map(product => (
             <div key={product.id} className={styles.product}>
-              <p className={styles.category}>{product.category} 🎉</p>
+              <motion.p
+                className={styles.category}
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05, bounce: 0 }}
+              >
+                {product.category} 🎉
+              </motion.p>
 
-              <motion.ul 
+              <motion.ul
                 className={styles.productItems}
                 initial="hidden"
                 animate="visible"

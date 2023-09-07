@@ -7,27 +7,6 @@ export type Vender = {
   image: string;
 };
 
-type Product = {
-  id: number;
-  name: string;
-  description?: string;
-  price: number;
-  variants: Variant[];
-};
-
-type Variant = {
-  id: number;
-  name: string;
-  isRequired: boolean;
-  options: Option[];
-};
-
-type Option = {
-  id: number;
-  name: string;
-  extraCharge: number;
-};
-
 type PagedVenders = {
   nextPage: number;
   data: Vender[];
@@ -49,18 +28,18 @@ async function fetchVenders({ pageParam = 1 }) {
 const MAX_PAGE_SIZE = 10;
 
 export default function useVenders() {
-  const { 
-    data, 
-    isLoading, 
-    fetchNextPage, 
-    isFetchingNextPage, 
-    hasNextPage, 
-    isError, 
-    error 
+  const {
+    data,
+    isLoading,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+    isError,
+    error
   } = useInfiniteQuery<PagedVenders, Error>({
     queryKey: ['venders'],
     queryFn: fetchVenders,
-    getNextPageParam: (lastPage, pages) => {
+    getNextPageParam: (lastPage, _pages) => {
       if (lastPage.nextPage < MAX_PAGE_SIZE) {
         return lastPage.nextPage;
       }

@@ -1,5 +1,5 @@
-import type { PickedItem } from '../src/stores/usePickedItemStore';
-import type { OrderItem } from '../src/stores/useShoppingCartStore';
+import type { PickedItem } from '../stores/usePickedItemStore';
+import type { OrderItem } from '../stores/useShoppingCartStore';
 
 // free price is used to display text "FREE" when price is -1
 // do not calculate -1 in the total price

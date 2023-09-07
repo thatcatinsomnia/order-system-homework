@@ -16,20 +16,23 @@ const li = {
   },
   visible: {
     opacity: 1,
-    x: 0
+    x: 0,
+    transition: {
+      bounce: 0
+    }
   }
 };
 
 export default function ProductItem({ item, onPickItem }: Props) {
   return (
     <motion.li
-      className={styles.item} 
+      className={styles.item}
       variants={li}
       onClick={() => onPickItem(item)}
     >
-      <img 
+      <img
         className={styles.itemImg}
-        src={`https://loremflickr.com/100/100/drinks,meals`} 
+        src={`https://loremflickr.com/100/100/drinks,meals`}
       />
 
       <div className={styles.itemContent}>

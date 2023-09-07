@@ -12,6 +12,10 @@
   background: var(--color-hover-hint);
 }
 
+.option > * {
+  cursor: pointer;
+}
+
 .variantName {
   font-size: 16px;
   display: flex;
