@@ -62,7 +62,7 @@
 
 .ctaWrapper {
   /* make layout shift left 15px, headless ui will add padding-right 15px when scrollbar visible */
-  padding-right: 15px;
+  padding:0 15px;
 
   /* 100vw to ignore scrollbar, combine with padding-right make position look correct */
   width: 100vw;
