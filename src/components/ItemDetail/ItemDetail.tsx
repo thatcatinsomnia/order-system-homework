@@ -2,7 +2,7 @@ import type { ChangeEvent } from 'react';
 import type { PickedItem } from '../../stores/usePickedItemStore';
 import { useRef, useEffect } from 'react';
 import { motion, useSpring } from 'framer-motion';
-import { FiPlus, FiMinus, FiAlertCircle } from 'react-icons/fi';
+import { FiPlus, FiMinus, FiAlertCircle, FiGift } from 'react-icons/fi';
 import { decrease, increase } from '../../stores/usePickedItemStore';
 import useInputErrorStore, { addError, setError, clearErrors, setInputRef } from '../../stores/useInputErrorStore';
 import validateVariants from '../../helper/validateVariants';
@@ -17,9 +17,10 @@ type Props = {
   onUpdateCustomer: (customer: string) => void;
   onUpdateNote: (note: string) => void;
   isEdit?: boolean;
+  isAnimate?: boolean;
 };
 
-export default function ItemDetail({ item, onUpdateShoppingCart, onUpdateNote, onUpdateCustomer, isEdit = false }: Props) {
+export default function ItemDetail({ item, onUpdateShoppingCart, onUpdateNote, onUpdateCustomer, isEdit = false, isAnimate = false }: Props) {
   const totalPriceRef = useRef<HTMLSpanElement>(null);
   const totalPrice = calculateItemPrice(item);
 
@@ -28,6 +29,7 @@ export default function ItemDetail({ item, onUpdateShoppingCart, onUpdateNote, o
 
   const errors = useInputErrorStore(state => state.errors);
   const inputRefs = useInputErrorStore(state => state.inputRefs);
+  
   const ref = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -140,8 +142,15 @@ export default function ItemDetail({ item, onUpdateShoppingCart, onUpdateNote, o
         <button
           className={styles.submitButton}
           onClick={handleUpdateShoppingCart}
+          id="submit"
         >
-          { isEdit ? '更新購物車' : '加到購物車'}
+          {isAnimate ? (
+            <span>
+              { isEdit ? '更新購物車' : '加到購物車'}
+            </span>
+          ) : (
+            <FiGift />
+          )}
         </button>
       </div>
     </div>

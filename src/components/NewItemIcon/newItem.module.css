@@ -1,0 +1,11 @@
+.wrapper {
+  height: 80px;
+  width: 80px;
+  display: grid;
+  place-items: center;
+  position: fixed;
+  top: 40%;
+  left: 40%;
+  background: red;
+  border-radius: 9999px;
+}

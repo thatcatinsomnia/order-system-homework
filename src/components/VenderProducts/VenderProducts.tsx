@@ -1,6 +1,7 @@
 import type { Item } from '../../hooks/useVenderProducts';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion, useAnimate } from 'framer-motion';
 import randomId from '../../helper/randomId';
 import useVenderProducts from '../../hooks/useVenderProducts';
 import VenderProductsSkeleton from '../../components/VenderProductsSkeleton';
@@ -10,7 +11,7 @@ import usePickedItem, {
   updateCustomer,
   updateNote
 } from '../../stores/usePickedItemStore';
-import { addToShoppingCart } from '../../stores/useShoppingCartStore';
+import useShoppingCartStore, { addToShoppingCart } from '../../stores/useShoppingCartStore';
 import { clearErrors } from '../../stores/useInputErrorStore';
 import FetchErrorMessage from '../../components/FetchErrorMessage';
 import ProductItem from '../../components/ProductItem';
@@ -33,7 +34,12 @@ const ul = {
   }
 };
 
+const MotionModal = motion(Modal);
+
 export default function VenderProducts() {
+  const [scope, animate] = useAnimate();
+  const [flyToShoppingCart, setFlyToShoppingCart] = useState(false);
+
   // we need to match the vender name in detail page,
   // don't do this in real world
   const { state } = useLocation();
@@ -42,6 +48,16 @@ export default function VenderProducts() {
   const { data, isLoading, isError, error } = useVenderProducts();
 
   const pickedItem = usePickedItem(state => state);
+  
+  useEffect(() => {
+    if (!scope.current) {
+      return;
+    }
+
+    animate('#submit', { width: 44, borderRadius: '50%', margin: '0 auto' });
+    animate('#submit', {  });
+
+  }, [flyToShoppingCart]);
 
   if (isLoading) {
     return <VenderProductsSkeleton />;
@@ -62,23 +78,30 @@ export default function VenderProducts() {
   };
 
   const onModalClose = () => {
+    setFlyToShoppingCart(false);
     clearErrors();
     clearPickedItem();
   };
 
   const handleAddToShoppingCart = () => {
+    if(flyToShoppingCart) {
+      return;
+    }
+
     const { vender, customer, note, item, quantity } = pickedItem;
 
-    addToShoppingCart({
-      id: randomId(),
-      vender,
-      customer,
-      note,
-      item: item as Item,
-      quantity
-    });
+    setFlyToShoppingCart(true);
 
-    onModalClose();
+    // addToShoppingCart({
+    //   id: randomId(),
+    //   vender,
+    //   customer,
+    //   note,
+    //   item: item as Item,
+    //   quantity
+    // });
+
+    // onModalClose();
   };
 
   return (
@@ -132,15 +155,20 @@ export default function VenderProducts() {
           ))}
         </div>
       </div>
+      
 
-      <Modal isOpen={!!pickedItem.item} onClose={onModalClose}>
+      <MotionModal
+        isOpen={!!pickedItem.item} 
+        onClose={onModalClose}
+        ref={scope}
+      >
         <ItemDetail
           item={pickedItem}
           onUpdateShoppingCart={handleAddToShoppingCart}
           onUpdateCustomer={updateCustomer}
           onUpdateNote={updateNote}
         />
-      </Modal>
+      </MotionModal>
     </div>
   );
 }

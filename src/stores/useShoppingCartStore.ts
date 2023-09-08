@@ -20,8 +20,7 @@ const MINIMUM_QUANTITY = 1;
 const useShoppingCartStore = create<State>()(
   persist(
     (_set, _get) => ({
-      cart: [],
-      editItem: null
+      cart: []
     }),
     {
       name: 'order-system'
