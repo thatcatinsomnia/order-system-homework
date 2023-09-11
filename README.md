@@ -28,5 +28,5 @@
    - [x] input 限制
 - [x] 移除購物車商品
    - [x] alert 刪除提示
-- [ ] animation
+- [x] animation
 - [ ] Testing
