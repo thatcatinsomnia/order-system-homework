@@ -1,7 +1,7 @@
 import type { Item } from '../../hooks/useVenderProducts';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { AnimatePresence, motion, useAnimate } from 'framer-motion';
+import { motion, useAnimate } from 'framer-motion';
 import randomId from '../../helper/randomId';
 import useVenderProducts from '../../hooks/useVenderProducts';
 import VenderProductsSkeleton from '../../components/VenderProductsSkeleton';
@@ -18,6 +18,7 @@ import ProductItem from '../../components/ProductItem';
 import ItemDetail from '../../components/ItemDetail';
 import Modal from '../../components/Modal';
 import styles from './venderProducts.module.css';
+import useFlyIconStore from '../../stores/useFlyIconStore';
 
 // framer-motoin variants
 const ul = {
@@ -46,18 +47,9 @@ export default function VenderProducts() {
   const { vender } = state;
 
   const { data, isLoading, isError, error } = useVenderProducts();
-
+  const {from, to, counter } = useFlyIconStore(state => state);
   const pickedItem = usePickedItem(state => state);
-  
-  useEffect(() => {
-    if (!scope.current) {
-      return;
-    }
-
-    animate('#submit', { width: 44, borderRadius: '50%', margin: '0 auto' });
-    animate('#submit', {  });
-
-  }, [flyToShoppingCart]);
+  const shoppingCart = useShoppingCartStore(state => state.cart);
 
   if (isLoading) {
     return <VenderProductsSkeleton />;
@@ -82,8 +74,88 @@ export default function VenderProducts() {
     clearErrors();
     clearPickedItem();
   };
+  
+  const startAnimation = async () => {
+    if (!scope.current) {
+      return;
+    }
 
-  const handleAddToShoppingCart = () => {
+    if (!from || !to || !counter) {
+      return;
+    }
+
+    const { left: fromLeft, top: fromTop } = from.getBoundingClientRect();
+    const { left: toLeft, top: toTop } = to.getBoundingClientRect();
+
+    const deltaX = toLeft - fromLeft;
+    const deltaY = toTop - fromTop;
+
+
+    // animation depends on shopping cart length
+    if (shoppingCart.length > 0) {
+      await animate([
+        // hiden scroll bar
+        ['#modal-srcollable-container', { overflowY: 'hidden' }],
+
+        // make modal content to become circle
+        ['#wrapper > div:first-child', { clipPath: ['circle(100%)', 'circle(20px)'], pointerEvents: ['none', 'none'] }, { at: '-1' }],
+  
+        // hide the circle and show shopping cart icon
+        ['#wrapper > div:first-child', { opacity: 0 }],
+        ['#fly-shopping-cart', { opacity: 1 }, { at: '-0.34' }],
+        ['#fly-shopping-cart > svg', { y: ['-150%', '0%'] }, { at: '-0.38' }],
+        
+        // make overlay lighter but not transparent
+        ['#overlay', { opacity: 0.3 }, { at: '-0.8' }],
+  
+        // fly the cart icon
+        ['#fly-shopping-cart', { x: deltaX, y: deltaY }, { at: '+0.4' }],
+  
+        // when icon is on header shopping cart position, make it hidden 
+        ['#fly-shopping-cart', { opacity: 0 }, { at: '-0.1' }],
+  
+        // then make overlay transparent, so we can see the jumping counter
+        ['#overlay', { opacity: 0 }],
+  
+        // counter jumping animation
+        [counter, { y: -10, rotate: [-32, 328], scale: 1.2 }, { at: '-0.44' }],
+        [counter, { y: 0, scale: 1 }]
+      ]);
+
+      return;
+    }
+
+    // the first item add to cart
+    await animate([
+      // hiden scroll bar
+      ['#modal-srcollable-container', { overflowY: 'hidden' }],
+      
+      // make modal content to become circle
+      ['#wrapper > div:first-child', { clipPath: ['circle(100%)', 'circle(20px)'], pointerEvents: ['none', 'none'] }, { at: '-1' }],
+
+      // hide the circle and show shopping cart icon
+      ['#wrapper > div:first-child', { opacity: 0 }],
+      ['#fly-shopping-cart', { opacity: 1 }, { at: '-0.34' }],
+      ['#fly-shopping-cart > svg', { y: ['-150%', '0%'] }, { at: '-0.38' }],
+      
+      // make overlay lighter but not transparent
+      ['#overlay', { opacity: 0.3 }, { at: '-0.8' }],
+
+      // fly the cart icon
+      ['#fly-shopping-cart', { x: deltaX, y: deltaY }, { at: '+0.4' }],
+
+      // when icon is on header shopping cart position, make it hidden 
+      ['#fly-shopping-cart', { opacity: 0 }, { at: '-0.1' }],
+
+      // then make overlay transparent, so we can see the jumping counter
+      ['#overlay', { opacity: 0 }],
+      // counter jumping animation
+      [counter, { y: -12, scale: 1.15, opacity: 1, rotate: -32 }, { at: '-0.44' }],
+      [counter, { y: 0, scale: 1 }]
+    ]);
+  };
+
+  const handleAddToShoppingCart = async () => {
     if(flyToShoppingCart) {
       return;
     }
@@ -92,16 +164,18 @@ export default function VenderProducts() {
 
     setFlyToShoppingCart(true);
 
-    // addToShoppingCart({
-    //   id: randomId(),
-    //   vender,
-    //   customer,
-    //   note,
-    //   item: item as Item,
-    //   quantity
-    // });
+    await startAnimation();
 
-    // onModalClose();
+    addToShoppingCart({
+      id: randomId(),
+      vender,
+      customer,
+      note,
+      item: item as Item,
+      quantity
+    });
+
+    onModalClose();
   };
 
   return (
@@ -161,6 +235,7 @@ export default function VenderProducts() {
         isOpen={!!pickedItem.item} 
         onClose={onModalClose}
         ref={scope}
+        isAnimate={flyToShoppingCart}
       >
         <ItemDetail
           item={pickedItem}

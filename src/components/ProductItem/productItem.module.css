@@ -2,7 +2,7 @@
   border-radius: var(--radius);
   background: white;
   display: flex;
-  overflow: hidden;
+  /* overflow: hidden; */
   color: hsl(253, 10%, 17%);
   box-shadow: 1px 1px 6px -2px rgb(0, 0, 0, 0.05);
   cursor: pointer;

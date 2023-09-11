@@ -4,7 +4,7 @@ import VenderProducts from '../components/VenderProducts';
 export default function Vender() {
   return (
     <Layout>
-        <VenderProducts />
+      <VenderProducts />
     </Layout>
   );
 }

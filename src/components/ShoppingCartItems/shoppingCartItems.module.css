@@ -130,6 +130,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: white;
+  border-radius: var(--radius);
 }
 
 .modalContent > p {

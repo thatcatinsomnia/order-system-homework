@@ -25,6 +25,7 @@
   margin: 0 auto;
   padding: 24px;
   max-width: var(--content-max-width);
+  overflow-x: hidden;
 }
 
 .title {

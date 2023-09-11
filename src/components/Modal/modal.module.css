@@ -20,6 +20,7 @@
   position: fixed;
   inset: 0;
   overflow-y: auto;
+  pointer-events: none;
 }
 
 .center {
@@ -49,10 +50,8 @@
   /* set relative so close button can position with it */
   position: relative;
   width: 100%;
-  background: white;
-  box-shadow: 1px 1px 6px -2px rgba(0, 0, 0, 0.34);
   border-radius: var(--radius);
-  overflow: hidden;
+  pointer-events: auto;
 }
 
 .close {

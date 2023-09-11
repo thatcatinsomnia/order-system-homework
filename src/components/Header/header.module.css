@@ -24,7 +24,7 @@
   height: 100%;
 }
 
-.shoppingCartButton {
+.shoppingCart {
   width: 40px;
   height: 40px;
   display: grid;
@@ -36,24 +36,36 @@
   cursor: pointer;
   transition: background-color 200ms ease;
   position: relative;
+  z-index: 2;
 }
 
-.shoppingCartButton:hover {
+.shoppingCart:hover {
   background: hsla(352, 90%, 51%, 0.082);
 }
 
+.shoppingCart > svg {
+  position: relative;
+  z-index: 1; /* make icon stack on top of count */
+}
+
 .count {
-  --size: 22px;
+  --size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
-  right: -6px;
+  z-index: 0; /* position with shoppingCart icon */
   top: -4px;
+  left: 12px;
   width: var(--size);
   height: var(--size);
   background: hsl(352, 78%, 64%);
-  border-radius: 9999px;
+  border-radius: 4px;
+  transform: rotate(-32deg);
   font-size: 10px;
   color: white;
+}
+
+.count.opacity {
+  opacity: 0;
 }
